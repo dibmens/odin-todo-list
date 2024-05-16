@@ -8,6 +8,7 @@ body{
     background-color: antiquewhite;
     color: rgb(39, 39, 39);
     font-family: Outfit;
+    position: relative;
     
 }
 
@@ -18,8 +19,12 @@ body{
     align-items: center;
     gap: 1em;
     background-color: rgb(39, 39, 39);
-    padding: 1em;
+    padding: .2em 1em;
+}
+
+.header {
     position: sticky;
+    top: 0px;
 }
 
 .logo {
@@ -27,7 +32,7 @@ body{
     align-items: center;
    .logo-name {
         font-weight: 700;
-        font-size: 2em;
+        font-size: 1.5em;
         color: aliceblue;
     }
     .logo-icon {
@@ -36,19 +41,19 @@ body{
     }
     .icon-a {
         box-sizing: border-box;
-        border: 12px solid rgba(0,0,0,0);
-        border-top: 13px solid rgb(190, 11, 11);
-        border-bottom: 12px solid aliceblue;
-        height: 25px;
-        width: 25px;
+        border: 10px solid rgba(0,0,0,0);
+        border-top: 10px solid rgb(190, 11, 11);
+        border-bottom: 10px solid aliceblue;
+        height: 20px;
+        width: 20px;
         border-radius: 1px 0 0 1px;
     }
     .icon-b {
         box-sizing: border-box;
-        border: 12px solid rgba(0,0,0,0);
-        border-left: 12px solid green;
-        height: 25px;
-        width: 25px;
+        border: 10px solid rgba(0,0,0,0);
+        border-left: 10px solid green;
+        height: 20px;
+        width: 20px;
         margin-bottom: 5px;
     }
 }
@@ -152,10 +157,11 @@ body{
     font-family: Outfit;
     color: aliceblue;
     font-weight: 500;
-    font-size: 1.3em;
+    font-size: 1.2em;
     background-color: green;
     border: 0;
     border-radius: 5px;
+    margin: 3em 0;
     padding: 5px 20px 8px 20px;
 }
 
