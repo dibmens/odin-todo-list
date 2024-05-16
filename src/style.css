@@ -1,0 +1,161 @@
+@font-face {
+    font-family: Outfit;
+    src: url(./assets/fonts/Outfit-VariableFont_wght.ttf);
+}
+
+body{
+    margin: 0;
+    background-color: antiquewhite;
+    color: rgb(39, 39, 39);
+    font-family: Outfit;
+    
+}
+
+.header,
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    background-color: rgb(39, 39, 39);
+    padding: 1em;
+    position: sticky;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+   .logo-name {
+        font-weight: 700;
+        font-size: 2em;
+        color: aliceblue;
+    }
+    .logo-icon {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .icon-a {
+        box-sizing: border-box;
+        border: 12px solid rgba(0,0,0,0);
+        border-top: 13px solid rgb(190, 11, 11);
+        border-bottom: 12px solid aliceblue;
+        height: 25px;
+        width: 25px;
+        border-radius: 1px 0 0 1px;
+    }
+    .icon-b {
+        box-sizing: border-box;
+        border: 12px solid rgba(0,0,0,0);
+        border-left: 12px solid green;
+        height: 25px;
+        width: 25px;
+        margin-bottom: 5px;
+    }
+}
+
+.menu-button {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 1.7em;
+    height: 3em;
+    width: 3em;
+    background-color: rgba(0,0,0,0);
+    border: none;
+}
+
+.settings {
+    background-image: url(./assets/icons/menu_24dp_FILL0_wght400_GRAD0_opsz24.svg);
+}
+
+.twitter {
+    background-image: url(./assets/icons/twitter.svg);
+}
+
+.youtube {
+    background-image: url(./assets/icons/youtube.svg);
+}
+
+.instagram {
+    background-image: url(./assets/icons/instagram.svg);
+}
+
+.facebook {
+    background-image: url(./assets/icons/facebook.svg);
+}
+
+
+.intro {
+    padding: 0 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    gap: 3em;
+    background-image: url(./assets/icons/drawing.svg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-clip: padding-box;
+}
+
+.tagline {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-size: 2.2em;
+    font-weight: 700;
+}
+
+.tagline::after{
+    content: url(./assets/icons/green-arrow.svg);
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.tagline:nth-of-type(2):after{
+    content: url(./assets/icons/red-arrow-target.svg);
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.tagline:nth-of-type(3):after{
+    content: url(./assets/icons/green-red-arrow-choice.svg);
+    display: inline-block;
+    margin-left: 5px;
+}
+
+
+.tagline:nth-of-type(4):after{
+    content: url(./assets/icons/green-arrow-motivate.svg);
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.tagline:nth-of-type(5):after{
+    content: url(./assets/icons/red-cube-stop.svg);
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.tagline:nth-of-type(6):after{
+    content: url(./assets/icons/green-red-arrow-progress.svg);
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.intro > p {
+    color: rgb(69, 69, 69);
+    font-size: 1.1em;
+    max-width: 25em;
+}
+
+.start-button {
+    font-family: Outfit;
+    color: aliceblue;
+    font-weight: 500;
+    font-size: 1.3em;
+    background-color: green;
+    border: 0;
+    border-radius: 5px;
+    padding: 5px 20px 8px 20px;
+}
+
