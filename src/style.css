@@ -8,8 +8,14 @@ body{
     background-color: antiquewhite;
     color: rgb(39, 39, 39);
     font-family: Outfit;
-    position: relative;
-    
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    position: sticky;
+    top: 0px;
 }
 
 .header,
@@ -19,149 +25,226 @@ body{
     align-items: center;
     gap: 1em;
     background-color: rgb(39, 39, 39);
-    padding: .2em 1em;
-}
+    padding: 0 1em;
 
-.header {
-    position: sticky;
-    top: 0px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-   .logo-name {
-        font-weight: 700;
-        font-size: 1.5em;
-        color: aliceblue;
+    .logo {
+        display: flex;
+        align-items: center;
+       .logo-name {
+            font-weight: 700;
+            font-size: 1.5em;
+            color: aliceblue;
+        }
+        .logo-icon {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+        .icon-a {
+            box-sizing: border-box;
+            border: 10px solid rgba(0,0,0,0);
+            border-top: 10px solid rgb(190, 11, 11);
+            border-bottom: 10px solid aliceblue;
+            height: 20px;
+            width: 20px;
+            border-radius: 1px 0 0 1px;
+        }
+        .icon-b {
+            box-sizing: border-box;
+            border: 10px solid rgba(0,0,0,0);
+            border-left: 10px solid green;
+            height: 20px;
+            width: 20px;
+            margin-bottom: 5px;
+        }
     }
-    .logo-icon {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+
+    .menu-button {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 1.7em;
+        height: 3em;
+        width: 3em;
+        background-color: rgba(0,0,0,0);
+        border: none;
     }
-    .icon-a {
-        box-sizing: border-box;
-        border: 10px solid rgba(0,0,0,0);
-        border-top: 10px solid rgb(190, 11, 11);
-        border-bottom: 10px solid aliceblue;
-        height: 20px;
-        width: 20px;
-        border-radius: 1px 0 0 1px;
+
+    .settings {
+        background-image: url(./assets/icons/menu_24dp_FILL0_wght400_GRAD0_opsz24.svg);
     }
-    .icon-b {
-        box-sizing: border-box;
-        border: 10px solid rgba(0,0,0,0);
-        border-left: 10px solid green;
-        height: 20px;
-        width: 20px;
-        margin-bottom: 5px;
+    
+    .twitter {
+        background-image: url(./assets/icons/twitter.svg);
+    }
+    
+    .youtube {
+        background-image: url(./assets/icons/youtube.svg);
+    }
+    
+    .instagram {
+        background-image: url(./assets/icons/instagram.svg);
+    }
+    
+    .facebook {
+        background-image: url(./assets/icons/facebook.svg);
     }
 }
 
-.menu-button {
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 1.7em;
-    height: 3em;
-    width: 3em;
-    background-color: rgba(0,0,0,0);
-    border: none;
-}
-
-.settings {
-    background-image: url(./assets/icons/menu_24dp_FILL0_wght400_GRAD0_opsz24.svg);
-}
-
-.twitter {
-    background-image: url(./assets/icons/twitter.svg);
-}
-
-.youtube {
-    background-image: url(./assets/icons/youtube.svg);
-}
-
-.instagram {
-    background-image: url(./assets/icons/instagram.svg);
-}
-
-.facebook {
-    background-image: url(./assets/icons/facebook.svg);
-}
-
-
-.intro {
+.landing-page {
     padding: 0 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
-    align-content: center;
+    /* align-content: center; */
     text-align: center;
     gap: 3em;
     background-image: url(./assets/icons/drawing.svg);
     background-repeat: no-repeat;
     background-position: bottom;
     background-clip: padding-box;
+
+    .tagline {
+        margin-top: 2em;
+        margin-bottom: 1em;
+        font-size: 2.2em;
+        font-weight: 700;
+        &::after{
+            content: url(./assets/icons/green-arrow.svg);
+            display: inline-block;
+            margin-left: 5px;
+        }
+        &:nth-of-type(2):after{
+            content: url(./assets/icons/red-arrow-target.svg);
+            display: inline-block;
+            margin-left: 5px;
+        }
+    
+        &:nth-of-type(3):after{
+            content: url(./assets/icons/green-red-arrow-choice.svg);
+            display: inline-block;
+            margin-left: 5px;
+        }
+    
+    
+        &:nth-of-type(4):after{
+            content: url(./assets/icons/green-arrow-motivate.svg);
+            display: inline-block;
+            margin-left: 5px;
+        }
+    
+        &:nth-of-type(5):after{
+            content: url(./assets/icons/red-cube-stop.svg);
+            display: inline-block;
+            margin-left: 5px;
+        }
+    
+        &:nth-of-type(6):after{
+            content: url(./assets/icons/green-red-arrow-progress.svg);
+            display: inline-block;
+            margin-left: 5px;
+        }
+    }
+
+    p {
+        color: rgb(69, 69, 69);
+        font-size: 1.1em;
+        max-width: 25em;
+    }
+
+    .start-button {
+        font-family: Outfit;
+        color: aliceblue;
+        font-weight: 500;
+        font-size: 1.4em;
+        background-color: green;
+        border: 0;
+        border-radius: 3px;
+        margin: 3em 0;
+        padding: 5px 20px 8px 20px;
+    }
 }
 
-.tagline {
-    margin-top: 2em;
-    margin-bottom: 1em;
-    font-size: 2.2em;
+.content-page {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    grid-template-rows: 2fr 1fr 8fr 1fr 8fr 2fr;
+}
+
+/* .content-page > *{
+    border: 1px solid red;
+} */
+
+.projects {
+    grid-row: 1/7 ;
+    background-color: rgba(0,0,0,.2);
+    padding: 1em;
     font-weight: 700;
-}
-
-.tagline::after{
-    content: url(./assets/icons/green-arrow.svg);
-    display: inline-block;
-    margin-left: 5px;
-}
-
-.tagline:nth-of-type(2):after{
-    content: url(./assets/icons/red-arrow-target.svg);
-    display: inline-block;
-    margin-left: 5px;
-}
-
-.tagline:nth-of-type(3):after{
-    content: url(./assets/icons/green-red-arrow-choice.svg);
-    display: inline-block;
-    margin-left: 5px;
-}
-
-
-.tagline:nth-of-type(4):after{
-    content: url(./assets/icons/green-arrow-motivate.svg);
-    display: inline-block;
-    margin-left: 5px;
-}
-
-.tagline:nth-of-type(5):after{
-    content: url(./assets/icons/red-cube-stop.svg);
-    display: inline-block;
-    margin-left: 5px;
-}
-
-.tagline:nth-of-type(6):after{
-    content: url(./assets/icons/green-red-arrow-progress.svg);
-    display: inline-block;
-    margin-left: 5px;
-}
-
-.intro > p {
-    color: rgb(69, 69, 69);
-    font-size: 1.1em;
-    max-width: 25em;
-}
-
-.start-button {
-    font-family: Outfit;
-    color: aliceblue;
-    font-weight: 500;
     font-size: 1.2em;
-    background-color: green;
-    border: 0;
-    border-radius: 5px;
-    margin: 3em 0;
-    padding: 5px 20px 8px 20px;
 }
 
+.active-project {
+    align-self: center;
+    text-align: center;
+    font-weight: 700;
+    font-size: 2em;
+}
+
+.inbox {
+    background-color: brown;
+    margin: 1em 2em;
+    border-radius: 20px;
+    border: 12px ridge rgba(190, 94, 94, .5);
+    border-bottom: 6px solid rgb(75, 21, 21);
+    box-shadow: inset  12px 13px 1px rgb(129, 39, 39), inset  13px 15px 20px rgb(129, 39, 39), inset  -1px -50px 50px rgba(255, 255, 255,.3), 15px 8px 1px rgba(0,0,0,.2);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.outbox {
+    background-color: darkolivegreen;
+    margin: 1em 2em;
+    border-radius: 20px;
+    border: 12px ridge rgba(112, 124, 92, .5);
+    border-bottom: 6px solid rgb(46, 58, 25);
+    box-shadow: inset  12px 13px 1px rgb(71, 90, 38), inset  13px 15px 20px darkolivegreen, inset  -1px -50px 50px rgba(255, 255, 255,.3), 15px 8px 1px rgba(0,0,0,.2);
+}
+
+
+.inbox-tasks,
+.outbox-tasks {
+    text-align: center;
+    align-self: end;
+    font-weight: 700;
+    font-size: 1.6em;
+}
+
+.inbox-tasks {
+    color: brown;
+    &::before{
+        content: url(./assets/icons/red-arrow.svg);
+        display: inline-block;
+        margin-right: 5px;
+    }
+}
+
+.outbox-tasks {
+    color:green;
+    &::after{
+        content: url(./assets/icons/green-arrow.svg);
+        display: inline-block;
+        margin-left: 5px;
+    }
+}
+
+.task {
+    background-color: aliceblue;
+    box-shadow: 5px 5px rgba(0,0,0,.3), inset 25px 20px 30px rgba(0,0,0,.1);
+    width: 90%;
+    height: 85%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.8em;
+    align-content: center;
+}
