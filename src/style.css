@@ -6,6 +6,7 @@
 body{
     margin: 0;
     background-color: antiquewhite;
+    /* background-color: rgb(99, 72, 72); */
     color: rgb(39, 39, 39);
     font-family: Outfit;
     display: flex;
@@ -167,60 +168,70 @@ body{
     flex-grow: 1;
     display: grid;
     grid-template-columns: 2fr 5fr;
-    grid-template-rows: 2fr 1fr 8fr 1fr 8fr 2fr;
+    grid-template-rows: 1fr 10fr 1fr;
 }
 
-/* .content-page > *{
-    border: 1px solid red;
-} */
-
-.projects {
-    grid-row: 1/7 ;
+.project-list {
+    grid-row: 1/4 ;
     background-color: rgba(0,0,0,.2);
     padding: 1em;
     font-weight: 700;
     font-size: 1.2em;
 }
 
-.active-project {
+.open-project-title {
     align-self: center;
     text-align: center;
     font-weight: 700;
     font-size: 2em;
 }
 
-.inbox {
-    background-color: brown;
-    margin: 1em 2em;
-    border-radius: 20px;
-    border: 12px ridge rgba(190, 94, 94, .5);
-    border-bottom: 6px solid rgb(75, 21, 21);
-    box-shadow: inset  12px 13px 1px rgb(129, 39, 39), inset  13px 15px 20px rgb(129, 39, 39), inset  -1px -50px 50px rgba(255, 255, 255,.3), 15px 8px 1px rgba(0,0,0,.2);
-
+.open-project {
     display: flex;
+    /* flex-direction: column; */
+    justify-content: space-around;
+    flex-wrap: wrap;
+} 
+
+
+.box {
+    display: flex;
+    margin-top: 1em;
+    border-radius: 20px;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    max-width: 20em;
+    max-height: 20em;
+    /* height: 75%; */
+    min-width: 200px;
+    min-height: 250px;
+}
+
+.inbox {
+    background-color: brown;
+    border: 12px ridge rgba(190, 94, 94, .5);
+    border-bottom: 6px solid rgb(75, 21, 21);
+    box-shadow: inset  12px 13px 1px rgb(129, 39, 39), inset  13px 15px 20px rgb(129, 39, 39), inset  -1px -50px 50px rgba(255, 255, 255,.3), 15px 8px 1px rgba(0,0,0,.2);  
 }
 
 .outbox {
     background-color: darkolivegreen;
-    margin: 1em 2em;
-    border-radius: 20px;
     border: 12px ridge rgba(112, 124, 92, .5);
     border-bottom: 6px solid rgb(46, 58, 25);
     box-shadow: inset  12px 13px 1px rgb(71, 90, 38), inset  13px 15px 20px darkolivegreen, inset  -1px -50px 50px rgba(255, 255, 255,.3), 15px 8px 1px rgba(0,0,0,.2);
 }
 
 
-.inbox-tasks,
-.outbox-tasks {
+.inbox-status,
+.outbox-status {
     text-align: center;
-    align-self: end;
     font-weight: 700;
     font-size: 1.6em;
+    margin-top: .5em;
 }
 
-.inbox-tasks {
+.inbox-status {
     color: brown;
     &::before{
         content: url(./assets/icons/red-arrow.svg);
@@ -229,22 +240,34 @@ body{
     }
 }
 
-.outbox-tasks {
+.outbox-status {
     color:green;
-    &::after{
+    &::before{
         content: url(./assets/icons/green-arrow.svg);
         display: inline-block;
         margin-left: 5px;
     }
 }
 
+
 .task {
     background-color: aliceblue;
-    box-shadow: 5px 5px rgba(0,0,0,.3), inset 25px 20px 30px rgba(0,0,0,.1);
+    border: 1px solid rgba(0,0,0,.2);
+    box-shadow: 3px 3px rgba(0,0,0,.4), 8px 3px rgba(0,0,0,.1), inset 25px 20px 30px rgba(0,0,0,.1);
     width: 90%;
-    height: 85%;
+    height: 90%;
     text-align: center;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 1.8em;
     align-content: center;
+}
+
+.task:nth-child(n+2){
+    /* margin-top: -8.1em; */
+    /* margin-top: -234px; */
+    margin-top: -125.35%;
+    /* margin-bottom: -0.1em; */
+    /* order: -1; */
+    /* background-color: rebeccapurple;
+    color: red; */
 }
