@@ -5,13 +5,23 @@
 
 body{
     margin: 0;
-    background-color: antiquewhite;
-    /* background-color: rgb(99, 72, 72); */
+    /* background-color: grey; */
+    /* background-image: url(./assets/icons/green-arrow-motivate.svg); */
+    /* background-position: bottom; */
+    /* background-repeat: no-repeat; */
+    /* background-size: 80%; */
+    /* background-color: rgb(190, 11, 11); */
+    /* background-color: rgba(39, 39, 39,.4); */
+    /* background-color: antiquewhite; */
+    background-color: rgb(197, 196, 196);
     color: rgb(39, 39, 39);
     font-family: Outfit;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    align-items: center;
+    /* filter: grayscale(80%); */
+    /* color: white; */
 }
 
 .header {
@@ -21,6 +31,8 @@ body{
 
 .header,
 .footer {
+    z-index: 1;
+    align-self: stretch;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -165,61 +177,100 @@ body{
 }
 
 .content-page {
+    max-width: 1200px;
     flex-grow: 1;
+    width: 100%;
+    /* align-self: center; */
     display: grid;
-    grid-template-columns: 2fr 5fr;
-    grid-template-rows: 1fr 10fr 1fr;
+    grid-template-rows: 1fr 5fr 2fr;
+    /* flex-direction: column; */
+    /* justify-content:start; */
+    /* flex-wrap: wrap; */
 }
 
 .project-list {
-    grid-row: 1/4 ;
+    /* grid-row: 1/4 ; */
     background-color: rgba(0,0,0,.2);
-    padding: 1em;
+    /* width: 100vw; */
+    /* overflow: hidden; */
+    padding: .5em;
     font-weight: 700;
     font-size: 1.2em;
+    margin: 0 1em 1em 1em;
 }
 
 .open-project-title {
     align-self: center;
     text-align: center;
-    font-weight: 700;
-    font-size: 2em;
+    font-weight:600;
+    font-size: 3em;
 }
 
 .open-project {
     display: flex;
     /* flex-direction: column; */
-    justify-content: space-around;
+    /* justify-content: space-evenly; */
+    /* align-content: stretch; */
     flex-wrap: wrap;
+    padding: 0 1em;
 } 
 
-
-.box {
+.box-wrapper {
     display: flex;
-    margin-top: 1em;
-    border-radius: 20px;
+    flex-grow: 1;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    max-width: 20em;
-    max-height: 20em;
-    /* height: 75%; */
-    min-width: 200px;
+    /* height: 45%; */
+    /* align-content: center; */
+    padding: 1em 1em;
+}
+
+.inbox-status {
+    color: brown;
+}
+
+.outbox-status {
+    color:green;
+}
+
+.box {
+    align-self: center;
+    flex-grow: 1;
+    margin-top: 1em;
+    border-radius: 20px;
+    min-width: 170px;
     min-height: 250px;
+    width: 90%;
+    max-width: 352px;
+    max-height: 400px;
+    display: grid;
+    /* grid-template-rows:  1fr 100%; */
+    /* grid-template-rows: repeat(48,10px); */
+    /* grid-template-columns: 1fr 100%; */
+    padding: .5em;
+    /* justify-content: center; */
+    /* transform: rotateX(20deg); */
 }
 
 .inbox {
     background-color: brown;
     border: 12px ridge rgba(190, 94, 94, .5);
     border-bottom: 6px solid rgb(75, 21, 21);
-    box-shadow: inset  12px 13px 1px rgb(129, 39, 39), inset  13px 15px 20px rgb(129, 39, 39), inset  -1px -50px 50px rgba(255, 255, 255,.3), 15px 8px 1px rgba(0,0,0,.2);  
+    box-shadow: inset  12px 13px 1px rgb(129, 39, 39), 
+    inset  13px 15px 20px rgb(129, 39, 39), 
+    inset  -1px -50px 50px rgba(255, 255, 255,.3), 
+    15px 8px 1px rgba(0,0,0,.2);  
 }
 
 .outbox {
     background-color: darkolivegreen;
     border: 12px ridge rgba(112, 124, 92, .5);
     border-bottom: 6px solid rgb(46, 58, 25);
-    box-shadow: inset  12px 13px 1px rgb(71, 90, 38), inset  13px 15px 20px darkolivegreen, inset  -1px -50px 50px rgba(255, 255, 255,.3), 15px 8px 1px rgba(0,0,0,.2);
+    box-shadow: inset  12px 13px 1px rgb(71, 90, 38),
+     inset  13px 15px 20px darkolivegreen, 
+     inset  -1px -50px 50px rgba(255, 255, 255,.3), 
+     15px 8px 1px rgba(0,0,0,.2);
 }
 
 
@@ -227,47 +278,100 @@ body{
 .outbox-status {
     text-align: center;
     font-weight: 700;
-    font-size: 1.6em;
+    font-size: 2em;
     margin-top: .5em;
 }
-
-.inbox-status {
-    color: brown;
-    &::before{
-        content: url(./assets/icons/red-arrow.svg);
-        display: inline-block;
-        margin-right: 5px;
-    }
-}
-
-.outbox-status {
-    color:green;
-    &::before{
-        content: url(./assets/icons/green-arrow.svg);
-        display: inline-block;
-        margin-left: 5px;
-    }
-}
-
 
 .task {
     background-color: aliceblue;
     border: 1px solid rgba(0,0,0,.2);
     box-shadow: 3px 3px rgba(0,0,0,.4), 8px 3px rgba(0,0,0,.1), inset 25px 20px 30px rgba(0,0,0,.1);
-    width: 90%;
-    height: 90%;
+    /* width: 90%; */
+    /* height: 90%; */
     text-align: center;
     font-weight: 600;
-    font-size: 1.8em;
+    font-size: 2.2em;
     align-content: center;
+    grid-area: 1/1/2/2;
 }
 
-.task:nth-child(n+2){
-    /* margin-top: -8.1em; */
-    /* margin-top: -234px; */
-    margin-top: -125.35%;
-    /* margin-bottom: -0.1em; */
-    /* order: -1; */
-    /* background-color: rebeccapurple;
-    color: red; */
+.task:nth-child(2){
+   margin-bottom: 5px;
+   margin-top: -5px;
+}
+.task:nth-child(3){
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+.task:nth-child(4){
+    margin-bottom: 15px;
+    margin-top: -15px;
+}
+.task:nth-child(5){
+    margin-bottom: 20px;
+    margin-top: -20px;
+}
+.task:nth-child(6){
+    margin-bottom: 25px;
+    margin-top: -25px;
+}
+.task:nth-child(7){
+    margin-bottom: 30px;
+    margin-top: -30px;
+ }
+ .task:nth-child(8){
+     margin-bottom: 35px;
+     margin-top: -35px;
+     
+ }
+ .task:nth-child(9){
+     margin-bottom: 40px;
+     margin-top: -40px;
+ }
+ .task:nth-child(10){
+     margin-bottom: 45px;
+     margin-top: -45px;
+ }
+ .task:nth-child(11){
+     margin-bottom: 50px;
+     margin-top: -50px;
+ }
+ .task:nth-child(12){
+    margin-bottom: 55px;
+    margin-top: -55px;
+}
+
+.task:nth-child(n){
+    transform: rotate(1deg);
+}
+
+.task:last-child{
+    transform: rotate(4deg);
+}
+
+@media screen and ( max-width: 550px){
+    body {
+        /* background-color: rgba(225, 0, 0,.7); */
+        transition: 1s;
+    }
+    .content-page {
+        grid-template-columns: 1fr 8fr;
+    }
+    .project-list {
+        grid-row: 1/4;
+        margin: 0;
+    }
+    .open-project {
+        grid-column: 2/3;
+        grid-row: 2/4;
+    }
+
+    .open-project-title {
+        font-size: 2.2em;
+    }
+
+    .inbox-status,
+    .outbox-status {
+        font-size: 1.4em;
+    }
 }
