@@ -79,6 +79,10 @@ body{
         width: 3em;
         background-color: rgba(0,0,0,0);
         border: none;
+
+        &:hover {
+            background-size: 1.9em;
+        }
     }
 
     .settings {
@@ -242,6 +246,10 @@ body{
     padding: .5em;
     /* justify-content: center; */
     /* transform: rotateX(20deg); */
+    &:hover {
+        transform: rotate(-4deg);
+    }
+
 }
 
 .inbox {
@@ -284,6 +292,7 @@ body{
     font-size: 2.2em;
     align-content: center;
     grid-area: 1/1/2/2;
+
 }
 
 .task:nth-child(2){
@@ -369,7 +378,9 @@ body{
     margin: .2em 0 .2em 0;
 
     &:hover {
-        
+        .project-icon{
+            padding-bottom: 1em;
+        }
     }
 
     &:active {
