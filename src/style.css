@@ -3,6 +3,10 @@
     src: url(./assets/fonts/Outfit-VariableFont_wght.ttf);
 }
 
+* {
+    font-family: Outfit;
+}
+
 body{
     margin: 0;
     /* background-color: grey; */
@@ -15,7 +19,6 @@ body{
     /* background-color: antiquewhite; */
     background-color: rgb(197, 196, 196);
     color: rgb(39, 39, 39);
-    font-family: Outfit;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -23,6 +26,12 @@ body{
     /* filter: grayscale(80%); */
     /* color: white; */
 }
+
+button {
+    border: none;
+    background-color: rgba(0,0,0,0);
+}
+
 
 .header {
     position: sticky;
@@ -168,7 +177,6 @@ body{
     }
 
     .start-button {
-        font-family: Outfit;
         color: aliceblue;
         font-weight: 500;
         font-size: 1.4em;
@@ -186,28 +194,30 @@ body{
     width: 100%;
     /* align-self: center; */
     display: grid;
+    grid-template-columns: 1fr 10fr 1fr;
     grid-template-rows: .8fr 6fr 3fr;
     /* flex-direction: column; */
     /* justify-content:start; */
     /* flex-wrap: wrap; */
 }
 
-
-
 .open-project-title {
     align-self: center;
     text-align: center;
-    font-weight:600;
+    font-weight:700;
     font-size: 2.5em;
+    grid-column: 2;
+    /* order: -1; */
 }
 
 .open-project {
+    grid-column: 2;
     display: flex;
     /* flex-direction: column; */
     /* justify-content: space-evenly; */
     /* align-content: stretch; */
     flex-wrap: wrap;
-    padding: 0 1em;
+    /* padding: 0 1em; */
 } 
 
 .box-wrapper {
@@ -218,11 +228,11 @@ body{
     align-items: center;
     /* height: 45%; */
     /* align-content: center; */
-    padding: .5em 1em;
+    padding: .5em .5em;
 }
 
 .inbox-status {
-    color: brown;
+    color: brown;   
 }
 
 .outbox-status {
@@ -234,8 +244,8 @@ body{
     flex-grow: 1;
     margin-top: 1em;
     border-radius: 20px;
-    min-width: 170px;
-    min-height: 250px;
+    min-width: 160px;
+    min-height: 230px;
     width: 90%;
     max-width: 352px;
     max-height: 400px;
@@ -246,9 +256,9 @@ body{
     padding: .5em;
     /* justify-content: center; */
     /* transform: rotateX(20deg); */
-    &:hover {
+    /* &:hover {
         transform: rotate(-4deg);
-    }
+    } */
 
 }
 
@@ -292,8 +302,18 @@ body{
     font-size: 2.2em;
     align-content: center;
     grid-area: 1/1/2/2;
+    
+    /* transition: background-image 1s; */
 
 }
+
+.outbox .task {
+    background-image: url(./assets/icons/stamp-done.svg);
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position:50% 75%;
+}
+
 
 .task:nth-child(2){
    margin-bottom: 5px;
@@ -349,7 +369,8 @@ body{
     transform: rotate(4deg);
 }
 
-.project-list {
+.project-bar {
+    grid-column: 1/4;
     /* grid-row: 1/4 ; */
     /* background-color: rgba(0,0,0,.2); */
     /* width: 100vw; */
@@ -378,8 +399,8 @@ body{
     margin: .2em 0 .2em 0;
 
     &:hover {
-        .project-icon{
-            padding-bottom: 1em;
+        .project-button-icon{
+            padding-bottom: .3em;
         }
     }
 
@@ -390,7 +411,7 @@ body{
     }
 }
 
-.project-icon{
+.project-button-icon{
     /* width: 100%; */
     height: 65%;
     min-height: 2.9em;
@@ -399,23 +420,95 @@ body{
     background-size: contain;
     background-position:center;
 }
-.project-title {
+.project-button-title {
     text-align: center;
-    font-weight: 700;
-    font-size: 1.2em;
+    font-weight: 600;
+    font-size: 1.1em;
 }
 
-@media screen and ( max-width: 800px){
+.project-button-icon.add-new {
+    background-image: url(./assets/icons/folder-add.svg);
+}
+
+.tool-bar {
+    /* order: -1; */
+    grid-column: 1;
+    grid-row: 2;
+    display: grid;
+    grid-template-rows: repeat(5,1fr);
+    padding: 1em 1em 1em .5em;
+    gap: .5em;
+}
+
+.tool-bar:last-of-type {
+    grid-column: 3;
+}
+
+.tool {
+    height:100%;
+    min-height: 2.9em;
+    background-repeat: no-repeat;
+    background-size: 75%;
+    background-position:center;
+    /* margin: 1em; */
+
+}
+
+.tool:hover {
+    border: 2px solid aliceblue;
+}
+
+
+.edit-project {
+    background-image: url(./assets/icons/pencil-on-paper2.svg);
+    /* grid-row: 1; */
+}
+
+.sort-priority{
+    background-image: url(./assets/icons/priority-low.svg);
+}
+
+.sort-time {
+    background-image: url(./assets/icons/time-slow.svg);
+}
+
+.motivation {
+    background-image: url(./assets/icons/idea.svg);
+    /* grid-row: 4; */
+}
+
+.stamp-void {
+    background-image: url(./assets/icons/red-arrow.svg);
+}
+
+.stamp-done {
+    background-image: url(./assets/icons/green-arrow.svg);
+}
+
+
+
+.archive-project {
+    background-image: url(./assets/icons/archive-project.svg);
+    /* grid-row: 5; */
+}
+
+
+
+
+
+
+@media screen and ( max-width: 910px){
     body {
         /* background-color: rgba(225, 0, 0,.7); */
         transition: 1s;
     }
     .content-page {
-        grid-template-columns:  4fr 10fr;
+        grid-template-columns:  2fr 10fr 2fr;
         grid-template-rows: 1fr 11fr ;
     }
-    .project-list {
+    .project-bar {
         grid-row: 1/4;
+        grid-column: 1;
         align-content: start;
         background-color: rgba(0,0,0,.2);
         /* gap: .2em; */
@@ -425,22 +518,59 @@ body{
     .project-button {
         padding: .2em .5em .2em .5em;
     }
-    .project-icon {
+    .project-button-icon {
         height: 50%;
     }
 
-    .project-title {
+    .project-button-title {
         font-size: 1em;
+    }
+
+    .tool-bar {
+        grid-row: 1/4;
+        grid-column: 3;
+        grid-template-rows: repeat(10,1fr);
+        gap:1em;
+        /* order: 0; */
+        /* grid-template-columns: 1fr; */
+        /* grid-template-rows: repeat(10,1fr); */
+    }
+
+    /* .tool-bar>.tool:hover {
+        border: 2px white solid;
+    } */
+
+    .tool {
+        /* margin: .5em; */
+        background-size: contain;
+    }
+
+    .stamp-done {
+        grid-row: 5;
+    }
+    .stamp-void {
+        grid-row: 4;
+    }
+
+    .motivation {
+        grid-row:9;
+    }
+    .archive-project {
+        grid-row: 10;
     }
     .open-project {
         grid-column: 2/3;
         grid-row: 2/4;
+        padding: 0 1em;
     }
 
     .open-project-title {
+        grid-row: 1;
+        grid-column: 2;
         font-size: 2em;
         align-self: start;
         padding-top: .2em;
+        /* order: 0; */
     }
 
     .inbox-status,
@@ -449,3 +579,4 @@ body{
     }
 
 }
+
