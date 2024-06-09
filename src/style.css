@@ -435,9 +435,9 @@ button {
     grid-column: 1;
     grid-row: 2;
     display: grid;
-    grid-template-rows: repeat(5,1fr);
-    padding: 1em 1em 1em .5em;
-    gap: .5em;
+    grid-template-rows: repeat(6,1fr);
+    padding: 1em;
+    /* gap: .5em; */
 }
 
 .tool-bar:last-of-type {
@@ -445,17 +445,18 @@ button {
 }
 
 .tool {
-    height:100%;
-    min-height: 2.9em;
+    /* height:100%; */
+    /* min-height: 1em; */
     background-repeat: no-repeat;
-    background-size: 75%;
+    background-size: 85%;
     background-position:center;
-    /* margin: 1em; */
+    /* padding: 1em; */
+    &:hover {
+        /* margin-left: .4em; */
+        /* transition: .1s; */
+        background-size: contain;
+    }
 
-}
-
-.tool:hover {
-    border: 2px solid aliceblue;
 }
 
 
@@ -470,6 +471,7 @@ button {
 
 .sort-time {
     background-image: url(./assets/icons/time-slow.svg);
+    grid-row: 3;
 }
 
 .motivation {
@@ -494,17 +496,14 @@ button {
 
 
 
-
-
-
 @media screen and ( max-width: 910px){
     body {
         /* background-color: rgba(225, 0, 0,.7); */
-        transition: 1s;
+        /* transition: 1s; */
     }
     .content-page {
         grid-template-columns:  2fr 10fr 2fr;
-        grid-template-rows: 1fr 11fr ;
+        grid-template-rows: 1fr 9fr 3fr ;
     }
     .project-bar {
         grid-row: 1/4;
@@ -527,13 +526,23 @@ button {
     }
 
     .tool-bar {
-        grid-row: 1/4;
+        grid-row: 2/3;
         grid-column: 3;
-        grid-template-rows: repeat(10,1fr);
+        grid-template-rows: repeat(8,1fr);
         gap:1em;
+        align-content: start;
+        padding-left: .5em;
         /* order: 0; */
         /* grid-template-columns: 1fr; */
         /* grid-template-rows: repeat(10,1fr); */
+    }
+
+    .tool-bar:last-of-type {
+        /* grid-column: 3; */
+        /* display: none; */
+        /* z-index: 0; */
+        grid-template-rows: repeat(3,1fr);
+        grid-row: 3/4;
     }
 
     /* .tool-bar>.tool:hover {
@@ -542,21 +551,29 @@ button {
 
     .tool {
         /* margin: .5em; */
-        background-size: contain;
+        /* padding: 0; */
+        background-size: 85%;
+        
+        /* max-height: 1em; */
+        max-width: 3em;
+
+        &:hover {
+            background-size: contain;
+        }
     }
 
-    .stamp-done {
+    /* .stamp-done {
         grid-row: 5;
-    }
-    .stamp-void {
+    } */
+    /* .stamp-void {
         grid-row: 4;
-    }
+    } */
 
     .motivation {
-        grid-row:9;
+        grid-row:2;
     }
     .archive-project {
-        grid-row: 10;
+        grid-row: 3;
     }
     .open-project {
         grid-column: 2/3;
@@ -566,7 +583,7 @@ button {
 
     .open-project-title {
         grid-row: 1;
-        grid-column: 2;
+        grid-column: 2/4;
         font-size: 2em;
         align-self: start;
         padding-top: .2em;
@@ -576,6 +593,65 @@ button {
     .inbox-status,
     .outbox-status {
         font-size: 1.4em;
+    }
+
+}
+
+
+
+
+@media screen and ( min-width: 1400px) {
+
+    .tool {
+        background-size: 65%;
+    }
+
+    .tool:hover {
+        margin: 0;
+        background-size:75%;
+        
+    }
+    .tool::after,
+    .tool::before {
+        position: relative;
+        font-weight: 700;
+        font-size: 1.2em;
+    }
+
+    .tool::after {
+        left: 5em;
+    }
+
+    .tool::before {
+        right: 5em;
+    }
+
+    .edit-project::before {
+        content: "Manage Project";
+    }
+
+    .sort-priority::before {
+        content: "Sort by Priority";
+    }
+
+    .sort-time::before {
+        content: "Sort by Time";
+    }
+
+    .stamp-void::before {
+        content: "Abandon Task";
+    }
+
+    .stamp-done::before {
+        content: "Complete Task";
+    }
+
+    .motivation::after {
+        content: "Practical Advice";
+    }
+
+    .archive-project::after {
+        content: "Archive Project"
     }
 
 }
