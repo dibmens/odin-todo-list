@@ -1,10 +1,13 @@
+
+import Projects from './data/projects.json';
+
 export default function loadProjectPage(){
     let content = document.querySelector(`.content-page`);
-    let openProjectTitle = `shopping list`.toUpperCase();
+    let openProject = Projects[0]; 
 
     let projectPage = `
     <div class="open-project-title">
-            ${openProjectTitle}
+        ${openProject.project.toUpperCase()}
     </div>
     <div class="open-project">
         <div class="box-wrapper">
@@ -48,5 +51,24 @@ export default function loadProjectPage(){
     </div>`;
 
     content.insertAdjacentHTML(`afterbegin`, projectPage);
+    
+Projects.forEach((project) => {
+    let projectIcon = `
+        <button class="project-button">
+            <div class="project-button-icon"></div>
+            <div class="project-button-title">${project.project}</div>
+        </button>`;
+
+    document.querySelector(`.project-bar`).insertAdjacentHTML(`afterbegin`, projectIcon);
+});
+
+openProject.tasks.forEach((task) => {
+    let note = `<div class="task">${task.task}</div>`;
+    if(task.status == "active"){
+        document.querySelector(`.inbox`).insertAdjacentHTML(`beforeend`, note);
+    } else {
+        document.querySelector(`.outbox`).insertAdjacentHTML(`beforeend`, note);
+    };
+});
 
 }

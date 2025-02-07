@@ -1,0 +1,57 @@
+[
+    {
+        "project":"Friday",
+        "tasks":
+        [
+            {
+                "task":"Code",
+                "priority": true,
+                "time": 90,
+                "status": "active"
+            },
+            {
+                "task":"French lessons",
+                "priority": true,
+                "time": 5,
+                "status": "active"
+            },
+            {
+                "task":"Exercise",
+                "priority": true,
+                "time": 15,
+                "status": "done"
+            },
+            {
+                "task":"Read",
+                "priority": false,
+                "time": 60,
+                "status": "void"
+            }
+            
+        ]
+    },
+    {
+        "project":"Saturday",
+        "tasks":
+        [
+            {
+                "task":"Buy pipe isolation",
+                "priority": false,
+                "time": 30,
+                "status": "active"
+            },
+            {
+                "task":"Drive mom to sister's",
+                "priority": true,
+                "time": 60,
+                "status": "active"
+            },
+            {
+                "task":"Visiting friends",
+                "priority": false,
+                "time": 120,
+                "status": "void"
+            }
+        ]
+    }
+]
