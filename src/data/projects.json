@@ -4,26 +4,26 @@
         "tasks":
         [
             {
-                "task":"Code",
-                "priority": true,
-                "time": 90,
-                "status": "active"
-            },
-            {
-                "task":"French lessons",
+                "task":"Duolingo",
                 "priority": true,
                 "time": 5,
                 "status": "active"
             },
             {
-                "task":"Exercise",
-                "priority": true,
-                "time": 15,
-                "status": "done"
+                "task":"Code",
+                "priority": false,
+                "time": 180,
+                "status": "active"
             },
             {
-                "task":"Read",
+                "task":"Exercise",
                 "priority": false,
+                "time": 15,
+                "status": "active"
+            },
+            {
+                "task":"Read a book chapter",
+                "priority": true,
                 "time": 60,
                 "status": "void"
             }

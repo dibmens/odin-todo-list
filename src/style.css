@@ -299,7 +299,7 @@ button {
     /* height: 90%; */
     text-align: center;
     font-weight: 600;
-    font-size: 2.2em;
+    font-size: 2.2rem;
     align-content: center;
     grid-area: 1/1/2/2;
     
@@ -308,10 +308,11 @@ button {
 }
 
 .outbox .task {
-    background-image: url(./assets/icons/stamp-done.svg);
+    background-image: url(./assets/icons/stamp-void.svg);
     background-repeat: no-repeat;
-    background-size: 80%;
+    background-size: 75%;
     background-position:50% 75%;
+
 }
 
 
@@ -496,7 +497,7 @@ button {
 
 
 
-@media screen and ( max-width: 910px){
+@media screen and ( max-width: 900px){
     body {
         /* background-color: rgba(225, 0, 0,.7); */
         /* transition: 1s; */

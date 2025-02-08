@@ -1,10 +1,12 @@
 
 import Projects from './data/projects.json';
 
+let openProject = Projects[0];
+
+// Load project page
+
 export default function loadProjectPage(){
     let content = document.querySelector(`.content-page`);
-    let openProject = Projects[0]; 
-
     let projectPage = `
     <div class="open-project-title">
         ${openProject.project.toUpperCase()}
@@ -15,7 +17,7 @@ export default function loadProjectPage(){
                 <!-- current task notes <div class="task">Take out the trash 1</div>-->
             </div>
             <div class="inbox-status">
-                INBOX (3)
+                INBOX
             </div>
         </div>
         <div class="box-wrapper">
@@ -23,7 +25,7 @@ export default function loadProjectPage(){
                 <!-- completed task notes <div class="task">Take out the trash 1</div>-->
             </div>
             <div class="outbox-status">
-                OUTBOX (80%)
+                OUTBOX
             </div>
         </div>
     </div>
@@ -52,23 +54,42 @@ export default function loadProjectPage(){
 
     content.insertAdjacentHTML(`afterbegin`, projectPage);
     
-Projects.forEach((project) => {
-    let projectIcon = `
-        <button class="project-button">
-            <div class="project-button-icon"></div>
-            <div class="project-button-title">${project.project}</div>
-        </button>`;
+    Projects.forEach((project) => {
+        let projectIcon = `
+            <button class="project-button">
+                <div class="project-button-icon"></div>
+                <div class="project-button-title">${project.project}</div>
+            </button>`;
 
-    document.querySelector(`.project-bar`).insertAdjacentHTML(`afterbegin`, projectIcon);
-});
+        document.querySelector(`.project-bar`).insertAdjacentHTML(`afterbegin`, projectIcon);
+    });
+};
 
-openProject.tasks.forEach((task) => {
-    let note = `<div class="task">${task.task}</div>`;
-    if(task.status == "active"){
-        document.querySelector(`.inbox`).insertAdjacentHTML(`beforeend`, note);
-    } else {
-        document.querySelector(`.outbox`).insertAdjacentHTML(`beforeend`, note);
-    };
-});
+// Load current active project into inbox and outbox
 
+export function loadTasks(){
+    let inbox = document.querySelector(`.inbox`);
+    let outbox = document.querySelector(`.outbox`);
+
+    inbox.innerHTML = ``;
+    outbox.innerHTML = ``;
+
+    openProject.tasks.forEach((task) => {
+        let note = `<div class="task">${task.task}</div>`;
+        if(task.status == "active"){
+            inbox.insertAdjacentHTML(`beforeend`, note);
+        } else {
+            outbox.insertAdjacentHTML(`beforeend`, note);
+        };
+    });
 }
+
+// Sort inbox tasks by time
+
+export function sortByTime(){
+    document.querySelector('.sort-time').addEventListener('click', ()=> {
+        openProject.tasks.sort((a,b) => a.time < b.time ? 1 : -1);
+        loadTasks();
+    });
+};
+
