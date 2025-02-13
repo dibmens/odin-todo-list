@@ -185,6 +185,13 @@ button {
         border-radius: 3px;
         margin: 3em 0;
         padding: 5px 20px 8px 20px;
+
+        &:hover {
+            /* margin: 0; */
+            box-shadow: 2px 2px 1px white;
+            padding-inline: 22px;
+            
+        }
     }
 }
 
@@ -302,20 +309,25 @@ button {
     font-size: 2.2rem;
     align-content: center;
     grid-area: 1/1/2/2;
-    
+    padding: 0 2rem;
     /* transition: background-image 1s; */
 
 }
 
-.outbox .task {
-    background-image: url(./assets/icons/stamp-void.svg);
+.done {
+    background-image: url(./assets/icons/stamp-done.svg);
     background-repeat: no-repeat;
     background-size: 75%;
     background-position:50% 75%;
 
 }
 
-
+.void {
+    background-image: url(./assets/icons/stamp-void.svg);
+    background-repeat: no-repeat;
+    background-size: 75%;
+    background-position:50% 75%;
+}
 .task:nth-child(2){
    margin-bottom: 5px;
    margin-top: -5px;
@@ -449,7 +461,7 @@ button {
     /* height:100%; */
     /* min-height: 1em; */
     background-repeat: no-repeat;
-    background-size: 85%;
+    background-size: 80%;
     background-position:center;
     /* padding: 1em; */
     &:hover {
@@ -656,4 +668,3 @@ button {
     }
 
 }
-

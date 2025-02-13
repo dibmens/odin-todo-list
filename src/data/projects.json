@@ -5,50 +5,50 @@
         [
             {
                 "task":"Duolingo",
-                "priority": true,
+                "priority": 4,
                 "time": 5,
                 "status": "active"
             },
             {
                 "task":"Code",
-                "priority": false,
+                "priority": 2,
                 "time": 180,
                 "status": "active"
             },
             {
-                "task":"Exercise",
-                "priority": false,
+                "task":"Bodyweight exercise",
+                "priority": 6,
                 "time": 15,
                 "status": "active"
             },
             {
-                "task":"Read a book chapter",
-                "priority": true,
+                "task":"Duolingo French",
+                "priority": 2,
                 "time": 60,
-                "status": "void"
+                "status": "done"
             }
             
         ]
     },
     {
-        "project":"Saturday",
+        "project":"Saturday Chores",
         "tasks":
         [
             {
                 "task":"Buy pipe isolation",
-                "priority": false,
+                "priority": 3,
                 "time": 30,
                 "status": "active"
             },
             {
                 "task":"Drive mom to sister's",
-                "priority": true,
+                "priority": 5,
                 "time": 60,
                 "status": "active"
             },
             {
                 "task":"Visiting friends",
-                "priority": false,
+                "priority": 5,
                 "time": 120,
                 "status": "void"
             }

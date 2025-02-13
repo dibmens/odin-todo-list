@@ -1,10 +1,13 @@
 import Data from './data/taglines.json';
+import loadProjectPage from './projectPage';
 
 export default function loadLandingPage(){
     let header = document.querySelector(`.header`);
     let landingPage = document.createElement(`div`);
     landingPage.className = `landing-page`;
     header.after(landingPage);
+
+// Populate the page with taglines
 
     Data.forEach((tagline) => {
         let div = document.createElement(`div`);
@@ -22,4 +25,11 @@ export default function loadLandingPage(){
     secondTagline.before(button);
     let secondButton = button.cloneNode(true);
     landingPage.append(secondButton);
-}
+
+// Buttons linking to the Projects page
+
+    document.querySelectorAll(`.start-button`).forEach((button)=> 
+        button.addEventListener(`click`, ()=> 
+            loadProjectPage()));
+
+};
