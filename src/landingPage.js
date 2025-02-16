@@ -28,8 +28,15 @@ export default function loadLandingPage(){
 
 // Buttons linking to the Projects page
 
-    document.querySelectorAll(`.start-button`).forEach((button)=> 
-        button.addEventListener(`click`, ()=> 
-            loadProjectPage()));
+    // document.querySelectorAll(`.start-button`).forEach((button)=> 
+    //     button.addEventListener(`click`, ()=> 
+    //         loadProjectPage()));
 
+    document.querySelectorAll(`.start-button`).forEach((button)=> 
+        button.addEventListener(`click`, function (){
+            
+            document.querySelector(`.landing-page`).remove();
+            loadProjectPage();
+        })
+    );
 };

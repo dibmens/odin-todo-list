@@ -2,14 +2,16 @@ export default class Project {
     #name;
     #inbox;
     #outbox;
+    #active;
     
     constructor(name){
         this.#name = name;
+        this.#active = true;
         this.#inbox = [];
         this.#outbox = [];
     }
 
-    #taskNote(task,time,priority,stamp = null){
+    #addNote(task,time,priority,stamp = null){
         return {
             task,
             time,
@@ -18,46 +20,57 @@ export default class Project {
         }
     }
 
-    getInbox(){
-        return this.#inbox;
+    getProjectName(){
+        return this.#name;
+    };
+
+    getProjectActivity(){
+        return this.#active;
     }
 
-    getOutbox(){
-        return this.#outbox
+    toggleProjectActivity(){
+        this.#active == true ? this.#active = false : this.#active = true;
     }
+
+    getInbox(){
+        return this.#inbox;
+    };
+
+    getOutbox(){
+        return this.#outbox;
+    };
 
     showCompletion(){
         let taskTotal = this.getInbox().length + this.getOutbox().length;
         return Math.trunc(this.getInbox().length / taskTotal)*100;
-    }
+    };
 
-    addTask(task, time = 10, priority = 1){
-        let newNote = this.#taskNote(task, time, priority);
+    createTask(task, time = 10, priority = 1){
+        let newNote = this.#addNote(task, time, priority);
         this.getInbox().push(newNote);
-    }
+    };
 
     sortInbox(key){
+        let inbox = this.getInbox();
 
         function isSorted(){
-            let testArray = []
-
-            for(i = 0; i < this.getInbox().length-1; i++){
-                testArray.push(this.getInbox[i][key] < this.getInbox[i+1][key])
-            }
-
-            return testArray.every(element => element == true);
+            let testArray = [];
+            for(let i = 0; i < inbox.length-1; i++){
+                testArray.push(inbox[i][key] < inbox[i+1][key])
+            };
+            return testArray.every((element) => element === true);
         }
 
-        if(this.getInbox().length > 1){
+        if(inbox.length > 1){
             if(isSorted()){
-                this.getInbox().sort((a,b) => a[key] > b[key] ? 1 : -1);
+                inbox.sort((a,b) => a[key] > b[key] ? 1 : -1);
             } else {
-                this.getInbox().sort((a,b) => a[key] < b[key] ? 1 : -1);
+                inbox.sort((a,b) => a[key] < b[key] ? 1 : -1);
             };
         };    
     }
 
-    stampTask(stamp){
+    stampTask(stamp = "Done"){
         if(this.getInbox().length > 0){
             let doneTask = this.getInbox().pop();
             doneTask.stamp = stamp;
@@ -65,4 +78,15 @@ export default class Project {
         };
     }
 
+}
+
+const activeProjects = [];
+
+export function createProject(name){
+    let newProject = new Project(name);
+    activeProjects.push(newProject);
+}
+
+export function getActiveProjects(){
+    return activeProjects;
 }

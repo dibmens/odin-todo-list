@@ -5,12 +5,43 @@ export default function loadProjectPage(){
 
     let content = document.querySelector(`.content-page`);
     let projectPage = `
+    
     <div class="open-project-title">
         PROJECT TITLE
     </div>
     <div class="open-project">
         <div class="box-wrapper">
             <div class="inbox box">
+                <div class="task-menu">
+                    <form class="form-wrap" action="">
+                        <div class="form-title">NEW TASK</div>
+                        <div class="form-member task-box">
+                            <label class="form-label" for="input-task">Task</label>
+                            <input id="input-task" required>
+                        </div>
+                        <div class="form-member time-box">
+                            <label class="form-label" for="input-time">Time</label>
+                            <input id="input-time" list="time">
+                            <datalist id="time">
+                                <option value="Short">5-15 Minutes</option>
+                                <option value="Medium">60-90 Minutes</option>
+                                <option value="Long">Couple Hours</option>
+                                <option value="Dedicated">Working Day</option>
+                                <option value="Long-term">Multiple Days</option>
+                            </datalist>
+                        </div>
+                        <div class="form-member importance-box">
+                            <label class="form-label" for="input-importance">Importance</label>
+                            <input id="input-importance" list="importance">
+                            <datalist id="importance">
+                                <option value="Low">Can be postponed</option>
+                                <option value="Medium">Sooner or later</option>
+                                <option value="High">A must-do</option>
+                            </datalist>
+                        </div>
+                        <button class="form-button" type="submit">CREATE</button>
+                    </form>
+                </div>
                 <!-- current task notes <div class="task">Take out the trash 1</div>-->
             </div>
             <div class="inbox-status">
@@ -49,7 +80,6 @@ export default function loadProjectPage(){
         <button class="tool archive-project"></button>
     </div>`;
 
-    document.querySelector(`.landing-page`).remove();
     content.insertAdjacentHTML(`afterbegin`, projectPage);
     
 };

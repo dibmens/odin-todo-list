@@ -187,11 +187,11 @@ button {
         padding: 5px 20px 8px 20px;
 
         &:hover {
-            /* margin: 0; */
-            box-shadow: 2px 2px 1px white;
-            padding-inline: 22px;
-            
+            /* padding:  0.5rem 0.7rem; */
+            box-shadow: 1px 1px 2px black;
+            transform: translate(2px, -2px);
         }
+
     }
 }
 
@@ -206,6 +206,68 @@ button {
     /* flex-direction: column; */
     /* justify-content:start; */
     /* flex-wrap: wrap; */
+}
+
+.task-menu {
+
+    .form-wrap {
+        display: grid;
+        
+        /* flex-direction: column; */
+        /* justify-items: center; */
+        justify-content: center;
+        gap: 0.4rem;
+    }
+
+    .form-title {
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .form-member {
+        display: grid;
+        gap: 0.4rem;
+    }
+
+    .form-button {
+        justify-self: center;
+        font-weight: 500;
+        flex-shrink: 1;
+        align-self: end;
+        font-size: 1rem;
+        color: aliceblue;
+        background-color: green;
+        opacity: .80;
+        padding: 0.5rem;
+        /* width: 65px; */
+        /* height: 30px; */
+        /* border-radius: 3px; */
+        margin-top: 1rem;
+        border-radius: 3px;
+
+        &:hover {
+            /* padding:  0.5rem 0.7rem; */
+            box-shadow: 1px 1px 2px black;
+            transform: translate(2px, -2px);
+        }
+    }
+
+    background-color: aliceblue;
+    border: 1px solid rgba(0,0,0,0.2);
+    box-shadow: 3px 3px rgba(0,0,0,0.4), 8px 3px rgba(0,0,0,0.1), inset 25px 20px 30px rgba(0,0,0,.1);
+    /* width: 90%; */
+    /* height: 90%; */
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.2rem;
+    align-content: center;
+    grid-area: 1/1/2/2;
+    /* transition: background-image 1s; */
+    
+}
+
+.hidden {
+    visibility: hidden;
 }
 
 .open-project-title {
@@ -607,6 +669,7 @@ button {
     .outbox-status {
         font-size: 1.4em;
     }
+
 
 }
 
