@@ -1,4 +1,7 @@
 import Project from "./userProjects";
+
+export let activeProject = new Project(`Friday Chores`);
+
 export default function loadProjectPage(){
 
     // load the project interface
@@ -12,36 +15,7 @@ export default function loadProjectPage(){
     <div class="open-project">
         <div class="box-wrapper">
             <div class="inbox box">
-                <div class="task-menu">
-                    <form class="form-wrap" action="">
-                        <div class="form-title">NEW TASK</div>
-                        <div class="form-member task-box">
-                            <label class="form-label" for="input-task">Task</label>
-                            <input id="input-task" required>
-                        </div>
-                        <div class="form-member time-box">
-                            <label class="form-label" for="input-time">Time</label>
-                            <input id="input-time" list="time">
-                            <datalist id="time">
-                                <option value="Short">5-15 Minutes</option>
-                                <option value="Medium">60-90 Minutes</option>
-                                <option value="Long">Couple Hours</option>
-                                <option value="Dedicated">Working Day</option>
-                                <option value="Long-term">Multiple Days</option>
-                            </datalist>
-                        </div>
-                        <div class="form-member importance-box">
-                            <label class="form-label" for="input-importance">Importance</label>
-                            <input id="input-importance" list="importance">
-                            <datalist id="importance">
-                                <option value="Low">Can be postponed</option>
-                                <option value="Medium">Sooner or later</option>
-                                <option value="High">A must-do</option>
-                            </datalist>
-                        </div>
-                        <button class="form-button" type="submit">CREATE</button>
-                    </form>
-                </div>
+                
                 <!-- current task notes <div class="task">Take out the trash 1</div>-->
             </div>
             <div class="inbox-status">
@@ -69,7 +43,7 @@ export default function loadProjectPage(){
        </button>
     </div>
     <div class="tool-bar">
-        <button class="tool edit-project"></button>
+        <button class="tool new-note"></button>
         <button class="tool sort-priority"></button>
         <button class="tool sort-time"></button>
         <button class="tool stamp-void"></button>
@@ -96,34 +70,30 @@ export default function loadProjectPage(){
 
 // Load current active project into inbox and outbox
 
-// export function loadTasks(){
-//     let inbox = document.querySelector(`.inbox`);
-//     let outbox = document.querySelector(`.outbox`);
+export function loadTasks(){
+    let projectInbox = activeProject.getInbox();
+    let projectOutbox = activeProject.getOutbox();
+    let inbox = document.querySelector(`.inbox`);
+    let outbox = document.querySelector(`.outbox`);
 
-//     inbox.innerHTML = ``;
-//     outbox.innerHTML = ``;
+    inbox.innerHTML = ``;
+    outbox.innerHTML = ``;
 
-//     openProject.tasks.forEach((task) => {
-//         let note = document.createElement(`div`);
-//         note.classList.add(`task`)
-//         note.innerText = `${task.task}`;
-//         if(task.status == "active"){
-//             inbox.append(note);
-//         } else {
-//             outbox.prepend(note);
-//             if(task.status == "done"){
-//                 note.classList.toggle(`done`);
-//             } else {
-//                 note.classList.toggle(`void`);
-//             };
-//         };
-    
-//     });
+    projectInbox.forEach((task) => {
+        let note = document.createElement(`div`);
+        note.classList.add(`task`);
+        note.innerText = `${task.task}`;
+        inbox.append(note);
+    });
 
-    // console.log(document.querySelector(`.inbox`).lastChild.innerText)
-    // console.log(document.querySelector(`.inbox`))
-    // console.log(openProject.tasks.filter((task) => task.status == `active`))
-// }
+    projectOutbox.forEach((task) => {
+        let note = document.createElement(`div`);
+        note.classList.add(`task`);
+        note.classList.add(`${note.stamp}`);
+        note.innerText = `${task.task}`;
+        inbox.append(note);
+    });
+}
 
 // Sort inbox tasks by time
 
@@ -147,3 +117,85 @@ export default function loadProjectPage(){
 //         }
 //     });
 // }
+
+
+
+// document.querySelector(`.new-note`).addEventListener('click',()=> {
+    
+// })
+
+
+export function openNoteForm(){
+    let newNote = `
+    <div class="task-menu task">
+        <form class="note-form" action="">
+            <div class="form-title">NEW NOTE</div>
+            <div class="form-member task-box">
+                <label class="form-label" for="input-task">Task</label>
+                <input id="input-task" required>
+            </div>
+            <div class="form-member time-box">
+                <label class="form-label" for="input-time">Time</label>
+                <input id="input-time" list="time">
+                <datalist id="time">
+                    <option value="5 - 15 Minutes">Quick</option>
+                    <option value="30 - 45 Minutes">Short</option>
+                    <option value="60 - 90 Minutes">Focused</option>
+                    <option value="3 - 4 Hours">Dedicated</option>
+                    <option value="All Day">Long</option>
+                </datalist>
+            </div>
+            <div class="form-member importance-box">
+                <label class="form-label" for="input-importance">Importance</label>
+                <input id="input-importance" list="importance">
+                <datalist id="importance">
+                    <option value="Low">If time allows</option>
+                    <option value="Medium">Sooner or later</option>
+                    <option value="High">Essential</option>
+                </datalist>
+            </div>
+            <div class="form-button-wrap">
+                <button class="form-button save" type="submit">CREATE</button>
+                <button class="form-button cancel" type="submit">CANCEL</button>
+            </div>
+        </form>
+    </div>`
+    document.querySelector(`.inbox`).insertAdjacentHTML('beforeend', newNote);
+
+    // document.querySelectorAll(`.form-button`).forEach(button =>
+    //     button.addEventListener(`click`, (event) => {
+    //         event.preventDefault();
+    //         if(button.classList.contains(`.save`)){
+    //             alert(`oy!`);
+    //             createNote();
+    //             console.log(activeProject);
+    //         }
+    //     })
+    // )
+
+
+    document.querySelector(`.save`).addEventListener(`click`, (event) =>{
+        event.preventDefault();
+        createNote();
+        console.log(activeProject.getInbox())
+    } )
+
+};
+
+export function createNote(){
+    let form = document.querySelector(`.note-form`);
+    activeProject.createTask(form[0].value, form[1].value, form[2].value);
+    form.reset();
+    loadTasks();
+}
+
+export function projectTools(){
+    document.querySelectorAll(`.tool`).forEach(button => 
+        button.addEventListener(`click`, () => {
+            if(button.classList.contains(`new-note`)){
+                openNoteForm();
+            }
+            
+        }) )
+}
+

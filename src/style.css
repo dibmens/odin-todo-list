@@ -189,19 +189,19 @@ button {
         &:hover {
             /* padding:  0.5rem 0.7rem; */
             box-shadow: 1px 1px 2px black;
-            transform: translate(2px, -2px);
+            transform: translate(0px, -2px);
         }
 
     }
 }
 
 .content-page {
-    max-width: 1200px;
+    max-width: 1000px;
     flex-grow: 1;
     width: 100%;
     /* align-self: center; */
     display: grid;
-    grid-template-columns: 1fr 10fr 1fr;
+    grid-template-columns: 1fr 8fr 1fr;
     grid-template-rows: .8fr 6fr 3fr;
     /* flex-direction: column; */
     /* justify-content:start; */
@@ -210,13 +210,15 @@ button {
 
 .task-menu {
 
-    .form-wrap {
+    .note-form {
         display: grid;
         
         /* flex-direction: column; */
         /* justify-items: center; */
         justify-content: center;
         gap: 0.4rem;
+        padding: 1rem 0;
+        font-size: 1.2rem;
     }
 
     .form-title {
@@ -229,6 +231,10 @@ button {
         gap: 0.4rem;
     }
 
+    .form-button-wrap {
+        /* padding-top: 10px; */
+    }
+
     .form-button {
         justify-self: center;
         font-weight: 500;
@@ -238,7 +244,7 @@ button {
         color: aliceblue;
         background-color: green;
         opacity: .80;
-        padding: 0.5rem;
+        padding: 0.4rem;
         /* width: 65px; */
         /* height: 30px; */
         /* border-radius: 3px; */
@@ -248,9 +254,29 @@ button {
         &:hover {
             /* padding:  0.5rem 0.7rem; */
             box-shadow: 1px 1px 2px black;
-            transform: translate(2px, -2px);
+            transform: translate(0px, -2px);
+        }
+
+    }
+
+    .cancel {
+        background-color: brown;
+    }
+
+    input {
+        background-color: aliceblue;
+        border-top: 2px black;
+        border-left: 0;
+        border-right: 0;
+        text-align: center;
+
+        &::selection {
+            border-top: 2px black;
+            border-left: 0;
+            border-right: 0;
         }
     }
+
 
     background-color: aliceblue;
     border: 1px solid rgba(0,0,0,0.2);
@@ -281,12 +307,16 @@ button {
 
 .open-project {
     grid-column: 2;
-    display: flex;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
     /* flex-direction: column; */
     /* justify-content: space-evenly; */
     /* align-content: stretch; */
-    flex-wrap: wrap;
     /* padding: 0 1em; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* grid-auto-flow: row; */
+
 } 
 
 .box-wrapper {
@@ -371,7 +401,7 @@ button {
     font-size: 2.2rem;
     align-content: center;
     grid-area: 1/1/2/2;
-    padding: 0 2rem;
+    padding: 0 1rem;
     /* transition: background-image 1s; */
 
 }
@@ -511,7 +541,8 @@ button {
     grid-row: 2;
     display: grid;
     grid-template-rows: repeat(6,1fr);
-    padding: 1em;
+    padding: 1rem;
+    min-width: 1rem;
     /* gap: .5em; */
 }
 
@@ -535,7 +566,7 @@ button {
 }
 
 
-.edit-project {
+.new-note {
     background-image: url(./assets/icons/pencil-on-paper2.svg);
     /* grid-row: 1; */
 }
@@ -577,7 +608,7 @@ button {
         /* transition: 1s; */
     }
     .content-page {
-        grid-template-columns:  2fr 10fr 2fr;
+        grid-template-columns:  1fr 9fr 2fr;
         grid-template-rows: 1fr 9fr 3fr ;
     }
     .project-bar {
@@ -653,7 +684,9 @@ button {
     .open-project {
         grid-column: 2/3;
         grid-row: 2/4;
-        padding: 0 1em;
+        padding: 0 1em 0 0.5em;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
     }
 
     .open-project-title {
@@ -670,6 +703,18 @@ button {
         font-size: 1.4em;
     }
 
+    .task-menu {
+        /* font-size: 0.3rem; */
+    }
+
+    .task {
+        padding: 0 0;
+    }
+
+    .box {
+        /* max-width: 90%; */
+        /* align-self: self-start; */
+    }
 
 }
 
@@ -702,7 +747,7 @@ button {
         right: 5em;
     }
 
-    .edit-project::before {
+    .new-note::before {
         content: "Manage Project";
     }
 

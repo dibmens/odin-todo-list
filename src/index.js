@@ -2,20 +2,20 @@ import _ from 'lodash';
 import './style.css';
 import loadLandingPage from './landingPage';
 import Project, { activeProjects } from './userProjects';
-import loadProjectPage from './projectPage';
+import loadProjectPage, { loadTasks, activeProject,openNoteForm, projectTools } from './projectPage';
 
 
-loadLandingPage(); 
-// loadProjectPage();
+// loadLandingPage(); 
+loadProjectPage();
 
-let saturday = new Project(`Saturday`);
-console.log(saturday.getProjectName());
+// let saturday = new Project(`Saturday`);
+// console.log(saturday.getProjectName());
 
-saturday.createTask("Do laundry", 15, 3);
-saturday.createTask("Do coding", 360, 5);
-saturday.createTask("Daily exercise", 15, 4);
-saturday.createTask("Read 3 chapters", 120, 2);
-saturday.createTask("French lesson", 5, 1);
+// saturday.createTask("Do laundry", 15, 3);
+// saturday.createTask("Do coding", 360, 5);
+// saturday.createTask("Daily exercise", 15, 4);
+// saturday.createTask("Read 3 chapters", 120, 2);
+// saturday.createTask("French lesson", 5, 1);
 
 
 // saturday.sortInbox("time");
@@ -39,3 +39,5 @@ saturday.createTask("French lesson", 5, 1);
 // }
 
 // console.log(isSorted());
+
+projectTools();

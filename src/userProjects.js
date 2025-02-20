@@ -70,11 +70,11 @@ export default class Project {
         };    
     }
 
-    stampTask(stamp = "Done"){
+    stampNote(stamp = "Done"){
         if(this.getInbox().length > 0){
-            let doneTask = this.getInbox().pop();
-            doneTask.stamp = stamp;
-            this.getOutbox().push(doneTask);
+            let finishedTask = this.getInbox().pop();
+            finishedTask.stamp = stamp;
+            this.getOutbox().push(finishedTask);
         };
     }
 
