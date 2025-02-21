@@ -4,8 +4,6 @@ export let activeProject = new Project(`Friday Chores`);
 
 export default function loadProjectPage(){
 
-    // load the project interface
-
     let content = document.querySelector(`.content-page`);
     let projectPage = `
     
@@ -57,18 +55,6 @@ export default function loadProjectPage(){
     content.insertAdjacentHTML(`afterbegin`, projectPage);
     
 };
-    // Projects.forEach((project) => {
-    //     let projectIcon = `
-    //         <button class="project-button">
-    //             <div class="project-button-icon"></div>
-    //             <div class="project-button-title">${project.project}</div>
-    //         </button>`;
-
-    //     document.querySelector(`.project-bar`).insertAdjacentHTML(`afterbegin`, projectIcon);
-    // });
-// };
-
-// Load current active project into inbox and outbox
 
 export function loadTasks(){
     let projectInbox = activeProject.getInbox();
@@ -94,36 +80,6 @@ export function loadTasks(){
         inbox.append(note);
     });
 }
-
-// Sort inbox tasks by time
-
-// export function sortByTime(){
-//     document.querySelector('.sort-time').addEventListener('click', ()=> {
-//         let inboxTasks = openProject.tasks.filter((task) => task.status == `active`);
-//         inboxTasks.sort((a,b) => a.time < b.time ? 1 : -1);
-//         loadTasks();
-//     });
-// };
-
-// export function finishTask(){
-//     let inbox = document.querySelector(`.inbox`);
-//         document.querySelector('.stamp-void').addEventListener('click', ()=> {
-//         if(inbox.innerHTML){openProject.tasks.forEach((task) => {
-//             if(inbox.lastChild.innerText == task.task){
-//                 task.status = `void`;
-//             }
-//         });
-//         loadTasks();
-//         }
-//     });
-// }
-
-
-
-// document.querySelector(`.new-note`).addEventListener('click',()=> {
-    
-// })
-
 
 export function openNoteForm(){
     let newNote = `
@@ -155,31 +111,31 @@ export function openNoteForm(){
                 </datalist>
             </div>
             <div class="form-button-wrap">
-                <button class="form-button save" type="submit">CREATE</button>
+                <button class="form-button create" type="submit">CREATE</button>
                 <button class="form-button cancel" type="submit">CANCEL</button>
             </div>
         </form>
     </div>`
+
     document.querySelector(`.inbox`).insertAdjacentHTML('beforeend', newNote);
 
-    // document.querySelectorAll(`.form-button`).forEach(button =>
-    //     button.addEventListener(`click`, (event) => {
-    //         event.preventDefault();
-    //         if(button.classList.contains(`.save`)){
-    //             alert(`oy!`);
-    //             createNote();
-    //             console.log(activeProject);
-    //         }
-    //     })
-    // )
-
-
-    document.querySelector(`.save`).addEventListener(`click`, (event) =>{
+    // Create form button
+    document.querySelector(`.create`).addEventListener(`click`, (event) => {
         event.preventDefault();
-        createNote();
-        console.log(activeProject.getInbox())
-    } )
+        if(document.querySelector(`.note-form`)[0].value){
+            createNote();
+            console.log(activeProject.getInbox())
+        } else {
+            document.querySelector(`.note-form`).reportValidity();
+        }
+        
+    });
 
+    // Cancel form button
+    document.querySelector(`.cancel`).addEventListener(`click`, (event) => {
+        event.preventDefault();
+        loadTasks();
+    });
 };
 
 export function createNote(){
