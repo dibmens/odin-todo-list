@@ -1,8 +1,9 @@
 export default class Project {
     #name;
+    #active;
     #inbox;
     #outbox;
-    #active;
+    
     
     constructor(name){
         this.#name = name;
@@ -70,7 +71,7 @@ export default class Project {
         };    
     }
 
-    stampNote(stamp = "Done"){
+    stampNote(stamp = "done"){
         if(this.getInbox().length > 0){
             let finishedTask = this.getInbox().pop();
             finishedTask.stamp = stamp;
@@ -82,9 +83,10 @@ export default class Project {
 
 const activeProjects = [];
 
-export function createProject(name){
+export function createNewProject(name){
     let newProject = new Project(name);
     activeProjects.push(newProject);
+    return newProject;
 }
 
 export function getActiveProjects(){

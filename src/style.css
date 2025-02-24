@@ -531,6 +531,13 @@ button {
     font-size: 1.1em;
 }
 
+.project-progress {
+    font-size: 1.2em;
+    font-weight: 500;
+    color: green;
+}
+
+
 .project-button-icon.add-new {
     background-image: url(./assets/icons/folder-add.svg);
 }
@@ -637,7 +644,7 @@ button {
         grid-template-rows: repeat(8,1fr);
         gap:1em;
         align-content: start;
-        padding-left: .5em;
+        padding: 1em .5em;
         /* order: 0; */
         /* grid-template-columns: 1fr; */
         /* grid-template-rows: repeat(10,1fr); */
@@ -714,6 +721,10 @@ button {
     .box {
         /* max-width: 90%; */
         /* align-self: self-start; */
+    }
+
+    .form-title {
+        margin-bottom: 0;
     }
 
 }
