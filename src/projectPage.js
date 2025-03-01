@@ -1,20 +1,19 @@
 import Project, { createNewProject, getActiveProjects } from "./userProjects";
 
-let activeProject = createNewProject(`Test Project`);
-let otherProject = createNewProject(`Shopping List`);
 
-activeProject.createTask(`Do laundry`, `30 minutes`, `Medium`);
-activeProject.createTask(`Go shopping`, `Afternoon`, `If there's time`);
-activeProject.createTask(`Code`, `Evening`, `Top Priority!!!`);
+let testProject = createNewProject(`Shopping List`);
+let otherProject = createNewProject(`Test Project`);
+
+testProject.createTask(`Do laundry`, `30 minutes`, `Medium`);
+testProject.createTask(`Go shopping`, `Afternoon`, `If there's time`);
+testProject.createTask(`Code`, `Evening`, `Top Priority!!!`);
 
 otherProject.createTask(`Milk`);
 otherProject.createTask(`Menthol Cigarets`);
 otherProject.createTask(`Laundry Detergent`);
 otherProject.createTask(`Potato Chips`);
 
-
-
-console.log(activeProject);
+let openProject;
 
 
 export default function loadProjectPage(){
@@ -28,8 +27,6 @@ export default function loadProjectPage(){
     <div class="open-project">
         <div class="box-wrapper">
             <div class="inbox box">
-                
-                <!-- current task notes <div class="task">Take out the trash 1</div>-->
             </div>
             <div class="inbox-status">
                 INBOX
@@ -37,7 +34,6 @@ export default function loadProjectPage(){
         </div>
         <div class="box-wrapper">
             <div class="outbox box">
-                <!-- completed task notes <div class="task">Take out the trash 1</div>-->
             </div>
             <div class="outbox-status">
                 OUTBOX
@@ -59,88 +55,95 @@ export default function loadProjectPage(){
         <button class="tool archive-project"></button>
     </div>`;
 
+    content.innerHTML = ``;
     content.insertAdjacentHTML(`afterbegin`, projectPage);
-    projectActions();
     loadTasks();
     loadProjects();
+    projectActions();
 };
 
 function loadProjects(){
-    console.log(getActiveProjects());
     let projectBar = document.querySelector(`.project-bar`);
-    let projectFolder = `
-        <button class="project-button">
-            <div class="project-button-icon"></div>
-            <div class="project-button-title"></div>
-            <div class="project-progress"></div>
-        </button>`;
-    let newProjectButton = `
-        <button class="project-button add-new">
-            <div class="project-button-icon add-new"></div>
-            <div class="project-button-title add-new"></div>
-            <div class="project-progress">ADD NEW</div>
-       </button>`;
     projectBar.innerHTML = ``;
-    projectBar.insertAdjacentHTML(`afterbegin`, newProjectButton);
     getActiveProjects().forEach((project) => {
         let inboxCount = project.getInbox().length;
         let outboxCount = project.getOutbox().length;
-        projectBar.insertAdjacentHTML(`afterbegin`, projectFolder);
-        document.querySelector(`.project-button-title`).innerText = 
-            project.getProjectName();
-        document.querySelector(`.project-progress`).innerText = 
-            `${outboxCount} / ${inboxCount + outboxCount}`;
-    })
+        let projectButton = document.createElement(`div`);
+        projectButton.classList.add(`project-button`);
+        projectButton.innerHTML = `
+            <div class="project-button-icon"></div>
+            <div class="project-button-title">
+                ${project.getProjectName()}
+            </div>
+            <div class="project-progress">
+                ${outboxCount} / ${inboxCount + outboxCount}
+            </div>`;
+        projectBar.append(projectButton);
+    });
 
-    
+    function projectButtonActions(){
+        document.querySelectorAll(`.project-button`).forEach((button, index) => 
+            button.addEventListener(`click`, () => {
+                console.log(`oy!`);
+                openProject = getActiveProjects()[index];
+                loadTasks();
+            })
+        );
+    }
+    projectButtonActions();
+
 }
 
 
 function loadTasks(){
-    let projectInbox = activeProject.getInbox();
-    let projectOutbox = activeProject.getOutbox();
-    let inbox = document.querySelector(`.inbox`);
-    let outbox = document.querySelector(`.outbox`);
+    
+    if(openProject){
+        let projectInbox = openProject.getInbox();
+        let projectOutbox = openProject.getOutbox();
+        let inbox = document.querySelector(`.inbox`);
+        let outbox = document.querySelector(`.outbox`);
 
-    inbox.innerHTML = ``;
-    outbox.innerHTML = ``;
+        inbox.innerHTML = ``;
+        outbox.innerHTML = ``;
+        
+        projectInbox.forEach((task) => {
+            let note = document.createElement(`div`);
+            note.classList.add(`task`);
+            // note.classList.add(`note-view`);
+            note.innerText = `${task.task}`;
+            inbox.append(note);
+        });
 
-    projectInbox.forEach((task) => {
-        let note = document.createElement(`div`);
-        note.classList.add(`task`);
-        note.innerText = `${task.task}`;
-        inbox.append(note);
-    });
+        projectOutbox.forEach((task) => {
+            let note = document.createElement(`div`);
+            note.classList.add(`task`);
+            note.classList.add(`${task.stamp}`.toLowerCase());
+            // note.classList.add(`done`);
+            note.innerText = `${task.task}`;
+            outbox.append(note);
+            // console.log(task.stamp);
+        });
 
-    projectOutbox.forEach((task) => {
-        let note = document.createElement(`div`);
-        note.classList.add(`task`);
-        note.classList.add(`${task.stamp}`.toLowerCase());
-        // note.classList.add(`done`);
-        note.innerText = `${task.task}`;
-        outbox.append(note);
-        console.log(task.stamp);
-    });
-
-    function displayInboxTaskCount(){
-        let taskCounter = document.querySelector(`.inbox-status`);
-        if(activeProject.getInbox().length >= 0){
-            taskCounter.innerText = `INBOX (${activeProject.getInbox().length})`;
+        function displayInboxTaskCount(){
+            let taskCounter = document.querySelector(`.inbox-status`);
+            if(openProject.getInbox().length >= 0){
+                taskCounter.innerText = `INBOX (${openProject.getInbox().length})`;
+            }
         }
+
+        function displayProjectTitle(){
+            let titleDiv = document.querySelector(`.open-project-title`);
+            let title = openProject.getProjectName();
+            titleDiv.innerText = title.toUpperCase();
+        }
+
+        displayProjectTitle();
+        displayInboxTaskCount();
     }
-
-    function displayProjectTitle(){
-        let titleDiv = document.querySelector(`.open-project-title`);
-        let title = activeProject.getProjectName();
-        titleDiv.innerText = title.toUpperCase();
-    }
-
-    displayProjectTitle();
-    displayInboxTaskCount();
-
+    
 }
 
-export function openNoteForm(){
+function openNoteForm(){
     let newNote = `
     <div class="task-menu task">
         <form class="note-form" action="">
@@ -181,7 +184,7 @@ export function openNoteForm(){
     let form = document.querySelector(`.note-form`);
 
     function createNote(){
-        activeProject.createTask(form[0].value, form[1].value, form[2].value);
+        openProject.createTask(form[0].value, form[1].value, form[2].value);
         form.reset();
         loadTasks();
         loadProjects();
@@ -192,7 +195,7 @@ export function openNoteForm(){
         event.preventDefault();
         if(form[0].value){
             createNote();
-            console.log(activeProject.getInbox())
+            console.log(openProject.getInbox())
         } else {
             form.reportValidity();
         }
@@ -214,21 +217,28 @@ function projectActions(){
                 openNoteForm();
             }
             if(button.classList.contains(`stamp-done`)){
-                if(activeProject.getInbox().length > 0){
-                    activeProject.stampNote(`Done`);
+                if(openProject.getInbox().length > 0){
+                    openProject.stampNote(`Done`);
                     loadTasks();
                     loadProjects();
                 }
             }
 
             if(button.classList.contains(`stamp-void`)){
-                if(activeProject.getInbox().length > 0){
-                    activeProject.stampNote(`Void`);
+                if(openProject.getInbox().length > 0){
+                    openProject.stampNote(`Void`);
                     loadTasks();
                     loadProjects();
                 }
             }
-        }) )
+        }) 
+    );
 }
+
+
+
+
+
+
 
 

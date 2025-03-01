@@ -1,3 +1,4 @@
+const activeProjects = [];
 export default class Project {
     #name;
     #active;
@@ -81,7 +82,7 @@ export default class Project {
 
 }
 
-const activeProjects = [];
+
 
 export function createNewProject(name){
     let newProject = new Project(name);

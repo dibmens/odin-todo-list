@@ -210,9 +210,21 @@ button {
 
 .task-menu {
 
+    background-color: aliceblue;
+    border: 1px solid rgba(0,0,0,0.2);
+    box-shadow: 3px 3px rgba(0,0,0,0.4), 8px 3px rgba(0,0,0,0.1), inset 25px 20px 30px rgba(0,0,0,.1);
+    /* width: 90%; */
+    /* height: 90%; */
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.2rem;
+    align-content: center;
+    grid-area: 1/1;
+    /* position: absolute; */
+    /* transition: background-image 1s; */
+
     .note-form {
         display: grid;
-        
         /* flex-direction: column; */
         /* justify-items: center; */
         justify-content: center;
@@ -276,19 +288,6 @@ button {
             border-right: 0;
         }
     }
-
-
-    background-color: aliceblue;
-    border: 1px solid rgba(0,0,0,0.2);
-    box-shadow: 3px 3px rgba(0,0,0,0.4), 8px 3px rgba(0,0,0,0.1), inset 25px 20px 30px rgba(0,0,0,.1);
-    /* width: 90%; */
-    /* height: 90%; */
-    text-align: center;
-    font-weight: 500;
-    font-size: 1.2rem;
-    align-content: center;
-    grid-area: 1/1/2/2;
-    /* transition: background-image 1s; */
     
 }
 
@@ -400,10 +399,14 @@ button {
     font-weight: 600;
     font-size: 2.2rem;
     align-content: center;
-    grid-area: 1/1/2/2;
+    grid-area: 1/1;
     padding: 0 1rem;
     /* transition: background-image 1s; */
 
+}
+
+.note-view {
+    grid-area: 0/0;
 }
 
 .done {
@@ -482,7 +485,7 @@ button {
     /* overflow: hidden; */
     /* padding: .5em 0; */
     font-weight: 700;
-    font-size: 1.2em;
+    /* font-size: 1rem; */
     /* margin: 0 1em 1em 1em; */
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(4em,8em));
@@ -490,6 +493,7 @@ button {
     grid-auto-flow: row;
     justify-content: center;
     align-content: stretch;
+    /* gap: 0.5em; */
 
     
     /* overflow-y: scroll; */
@@ -500,8 +504,8 @@ button {
 .project-button {
     border:none;
     background-color: rgba(0,0,0,0);
-    padding: .1em;
-    margin: .2em 0 .2em 0;
+    /* padding: 1em .1em; */
+    /* margin: .2em 0 .2em 0; */
 
     &:hover {
         .project-button-icon{
@@ -528,13 +532,15 @@ button {
 .project-button-title {
     text-align: center;
     font-weight: 600;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 .project-progress {
-    font-size: 1.2em;
+    text-align: center;
+    /* font-size: 1.1em; */
     font-weight: 500;
     color: green;
+    /* margin-top: -2px; */
 }
 
 
@@ -615,10 +621,11 @@ button {
         /* transition: 1s; */
     }
     .content-page {
-        grid-template-columns:  1fr 9fr 2fr;
-        grid-template-rows: 1fr 9fr 3fr ;
+        grid-template-columns:  2fr 9fr 2fr;
+        grid-template-rows: 0.7fr 9fr 3fr;
     }
     .project-bar {
+        font-size: 0.8rem;
         grid-row: 1/4;
         grid-column: 1;
         align-content: start;
@@ -628,7 +635,7 @@ button {
     }
 
     .project-button {
-        padding: .2em .5em .2em .5em;
+        padding: .5em .5em .8em .5em;
     }
     .project-button-icon {
         height: 50%;
@@ -715,12 +722,22 @@ button {
     }
 
     .task {
-        padding: 0 0;
+        padding: 0.3rem;
+        font-size: 1.8rem;
     }
 
     .box {
         /* max-width: 90%; */
         /* align-self: self-start; */
+    }
+
+    .note-form {
+        padding: 0 !important;
+        font-size: 1rem !important;
+        input {
+            position: ;
+            
+        }
     }
 
     .form-title {
