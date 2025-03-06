@@ -80,6 +80,12 @@ export default class Project {
         };
     }
 
+    pickTask(index){
+        let slice = this.getInbox().slice(index,index+1);
+        this.getInbox().splice(index,1);
+        this.getInbox().push(...slice);
+    }
+
 }
 
 
