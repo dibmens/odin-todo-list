@@ -21,9 +21,7 @@ export default function loadProjectPage(){
     let content = document.querySelector(`.content-page`);
     let projectPage = `
     
-    <div class="open-project-title">
-        PROJECT TITLE
-    </div>
+    <div class="open-project-title"></div>
     <div class="open-project">
         <div class="box-wrapper">
             <div class="inbox box">
@@ -92,21 +90,28 @@ function loadProjects(){
 
     projectBar.append(newProjectButton);
 
-
-    function projectButtonActions(){
-        let folders = document.querySelectorAll(`.project-button`);
-        folders.forEach((button, index) => 
-            button.addEventListener(`click`, () => {                
-                openProject = getActiveProjects()[index];
-                loadTasks();
-                folders.forEach(folder => folder.firstElementChild.classList.remove(`open`));
-                button.firstElementChild.classList.add(`open`);
-            })
-        );
-    }
     projectButtonActions();
-
+    
 }
+
+function projectButtonActions(){
+    let folders = document.querySelectorAll(`.project-button`);
+    let newFolderButton = document.querySelector(`.new-project-button`);
+    folders.forEach((button, index) => 
+        button.addEventListener(`click`, () => {                
+            openProject = getActiveProjects()[index];
+            loadTasks();
+            folders.forEach(folder => folder.firstElementChild.classList.remove(`open`));
+            button.firstElementChild.classList.add(`open`);
+        })
+    );
+    newFolderButton.addEventListener(`click`, () => {
+        // console.log(`this will create a new project`);
+        openProjectForm();
+    })
+}
+
+
 
 
 function loadTasks(){
@@ -131,6 +136,7 @@ function loadTasks(){
         projectOutbox.forEach((task) => {
             let note = document.createElement(`div`);
             note.classList.add(`task`);
+            note.classList.add(`note-view`);
             note.classList.add(`${task.stamp}`.toLowerCase());
             // note.classList.add(`done`);
             note.innerText = `${task.task}`;
@@ -160,7 +166,6 @@ function loadTasks(){
                             task.classList.replace(`note-view`,`list-view`);
                         })
                     } else {
-                        
                         openProject.pickTask(index);
                         loadTasks();
                         loadProjects();
@@ -171,17 +176,18 @@ function loadTasks(){
 
         // function toggleList(){
         //     let taskList = document.querySelectorAll(`.task`);
-        //     taskList.forEach((task) => {
+        //     taskList.forEach((task,index) => {
         //         task.addEventListener(`click`, () => {
-        //             taskList.forEach((task,index) => {
-        //                 if(task.classList.contains(`note-view`)){
+        //             if(task.classList.contains(`note-view`)){
+        //                 taskList.forEach((task) => {
         //                     task.classList.replace(`note-view`,`list-view`);
-        //                 } else {
-        //                     loadTasks();
-        //                     // task.classList.replace(`list-view`,`note-view`);
-        //                 }
+        //                 })
+        //             } else {
+                        
+        //                 openProject.pickTask(index);
+        //                 loadTasks();
+        //                 loadProjects();
         //             }
-        //             );
         //         })
         //     })
         // }
@@ -271,6 +277,7 @@ function projectActions(){
                     openProject.stampNote(`Done`);
                     loadTasks();
                     loadProjects();
+                    
                 }
             }
 
@@ -285,3 +292,39 @@ function projectActions(){
     );
 }
 
+function openProjectForm(){
+    let content = document.querySelector(`.content-page`);
+    let dialogWindow = document.createElement(`dialog`);
+    let currentTitle = document.querySelector(`.open-project-title`).innerText;
+    let form = document.createElement(`form`);
+    form.classList.add(`project-form`);
+    form.innerHTML = `
+            <label for="project title">Enter Project Title</label>
+            <input id="project-title" placeholder="My Project" required >
+            <div class="form-button-wrap">
+                <button class="form-button create-project">CREATE</button>
+                <button class="form-button cancel-project">CANCEL</button>
+            </div>`;
+    dialogWindow.append(form);
+    content.append(dialogWindow);
+    dialogWindow.showModal();
+
+    form[1].addEventListener(`click`, (event) => {
+        event.preventDefault();
+        if(form[0].value){
+            dialogWindow.close();
+            createNewProject(form[0].value);
+            loadTasks();
+            loadProjects();
+            let projectFolders = document.querySelectorAll(`.project-button`);
+            projectFolders[projectFolders.length-1].click();
+        } else {
+            form.reportValidity();
+        }
+    });
+
+    form[2].addEventListener(`click`, (event) => {
+        event.preventDefault();
+        dialogWindow.close();
+    });
+}

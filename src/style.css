@@ -197,6 +197,27 @@ button {
     /* flex-wrap: wrap; */
 }
 
+.form-button {
+    justify-self: center;
+    font-weight: 500;
+    flex-shrink: 1;
+    align-self: end;
+    font-size: 1rem;
+    color: aliceblue;
+    background-color: green;
+    opacity: .80;
+    padding: 0.4rem;
+    margin-top: 1rem;
+    border-radius: 3px;
+
+    &:hover {
+        box-shadow: 1px 1px 2px black;
+        transform: translate(0px, -2px);
+    }
+
+}
+
+
 .task-menu {
 
     background-color: aliceblue;
@@ -236,25 +257,7 @@ button {
         /* padding-top: 10px; */
     }
 
-    .form-button {
-        justify-self: center;
-        font-weight: 500;
-        flex-shrink: 1;
-        align-self: end;
-        font-size: 1rem;
-        color: aliceblue;
-        background-color: green;
-        opacity: .80;
-        padding: 0.4rem;
-        margin-top: 1rem;
-        border-radius: 3px;
-
-        &:hover {
-            box-shadow: 1px 1px 2px black;
-            transform: translate(0px, -2px);
-        }
-
-    }
+    
 
     .cancel {
         background-color: brown;
@@ -275,6 +278,23 @@ button {
     }
     
 }
+
+
+.project-form {
+    display: grid;
+    grid-template-rows: 0.5fr 0.8fr 1fr;
+    justify-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 1rem 0;
+    font-size: 1.2rem;
+
+    #project-title{
+        text-align: center;
+        font-size: 1.4rem;
+    }
+}
+
 
 .hidden {
     visibility: hidden;
@@ -357,6 +377,7 @@ button {
     margin-top: .5em;
 }
 
+dialog,
 .task {
     background-color: aliceblue;
     border: 1px solid rgba(0,0,0,.2);
