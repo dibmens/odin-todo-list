@@ -1,17 +1,17 @@
-import Project, { createNewProject, getActiveProjects } from "./userProjects";
+import Project from "./userProjects";
 
 
-let testProject = createNewProject(`Shopping List`);
-let otherProject = createNewProject(`Test Project`);
+// let testProject = createNewProject(`Shopping List`);
+// let otherProject = createNewProject(`Test Project`);
 
-testProject.createTask(`Do laundry`, `30 minutes`, `Medium`);
-testProject.createTask(`Go shopping`, `Afternoon`, `If there's time`);
-testProject.createTask(`Code`, `Evening`, `Top Priority!!!`);
+// testProject.createTask(`Do laundry`, `30 minutes`, `Medium`);
+// testProject.createTask(`Go shopping`, `Afternoon`, `If there's time`);
+// testProject.createTask(`Code`, `Evening`, `Top Priority!!!`);
 
-otherProject.createTask(`Milk`);
-otherProject.createTask(`Menthol Cigarets`);
-otherProject.createTask(`Laundry Detergent`);
-otherProject.createTask(`Potato Chips`);
+// otherProject.createTask(`Milk`);
+// otherProject.createTask(`Menthol Cigarets`);
+// otherProject.createTask(`Laundry Detergent`);
+// otherProject.createTask(`Potato Chips`);
 
 let openProject;
 
@@ -55,15 +55,18 @@ export default function loadProjectPage(){
 
     content.innerHTML = ``;
     content.insertAdjacentHTML(`afterbegin`, projectPage);
+
+    Project.fetchUserProjects();
     loadTasks();
     loadProjects();
     projectActions();
 };
 
 function loadProjects(){
+    
     let projectBar = document.querySelector(`.project-bar`);
     projectBar.innerHTML = ``;
-    getActiveProjects().forEach((project,index) => {
+    Project.getActiveProjects().forEach((project,index) => {
         let inboxCount = project.getInbox().length;
         let outboxCount = project.getOutbox().length;
         let projectButton = document.createElement(`button`);
@@ -99,7 +102,7 @@ function projectButtonActions(){
     let newFolderButton = document.querySelector(`.new-project-button`);
     folders.forEach((button, index) => 
         button.addEventListener(`click`, () => {                
-            openProject = getActiveProjects()[index];
+            openProject = Project.getActiveProjects()[index];
             loadTasks();
             folders.forEach(folder => folder.firstElementChild.classList.remove(`open`));
             button.firstElementChild.classList.add(`open`);
@@ -167,6 +170,7 @@ function loadTasks(){
                         })
                     } else {
                         openProject.pickTask(index);
+                        Project.saveUserProjects();
                         loadTasks();
                         loadProjects();
                     }
@@ -242,6 +246,7 @@ function openNoteForm(){
     function createNote(){
         openProject.createTask(form[0].value, form[1].value, form[2].value);
         form.reset();
+        Project.saveUserProjects();
         loadTasks();
         loadProjects();
         }
@@ -251,7 +256,7 @@ function openNoteForm(){
         event.preventDefault();
         if(form[0].value){
             createNote();
-            console.log(openProject.getInbox())
+            // console.log(openProject.getInbox())
         } else {
             form.reportValidity();
         }
@@ -275,6 +280,7 @@ function projectActions(){
             if(button.classList.contains(`stamp-done`)){
                 if(openProject.getInbox().length > 0){
                     openProject.stampNote(`Done`);
+                    Project.saveUserProjects();
                     loadTasks();
                     loadProjects();
                     
@@ -284,9 +290,22 @@ function projectActions(){
             if(button.classList.contains(`stamp-void`)){
                 if(openProject.getInbox().length > 0){
                     openProject.stampNote(`Void`);
+                    Project.saveUserProjects();
                     loadTasks();
                     loadProjects();
                 }
+            }
+
+            if(button.classList.contains(`archive-project`)){
+                // alert("this is an archive button");
+                localStorage.clear();
+                Project.saveUserProjects();
+            }
+
+            if(button.classList.contains(`motivation`)){
+                // alert("this is an archive button");
+                Project.fetchUserProjects();
+                loadProjectPage();
             }
         }) 
     );
@@ -313,7 +332,8 @@ function openProjectForm(){
         event.preventDefault();
         if(form[0].value){
             dialogWindow.close();
-            createNewProject(form[0].value);
+            Project.createNewProject(form[0].value);
+            Project.saveUserProjects();
             loadTasks();
             loadProjects();
             let projectFolders = document.querySelectorAll(`.project-button`);
