@@ -4,8 +4,12 @@ import loadProjectPage from './projectPage';
 export default function loadLandingPage(){
     let header = document.querySelector(`.header`);
     let landingPage = document.createElement(`div`);
+    let content = document.querySelector(`.content`);
+
+    content.innerHTML = ``;
     landingPage.className = `landing-page`;
-    header.after(landingPage);
+    // header.after(landingPage);
+    content.append(landingPage);
 
 // Populate the page with taglines
 

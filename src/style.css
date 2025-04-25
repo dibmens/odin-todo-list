@@ -14,7 +14,7 @@ body{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    align-items: center;
+    align-items: stretch;
 }
 
 button {
@@ -76,6 +76,7 @@ button {
         background-size: 1.7em;
         height: 3em;
         width: 3em;
+        margin-right: 1em;
         background-color: rgba(0,0,0,0);
         border: none;
 
@@ -103,6 +104,21 @@ button {
     .facebook {
         background-image: url(./assets/icons/facebook.svg);
     }
+}
+
+.menu-window {
+    position: absolute;
+    top: 2em;
+    right: 0;
+    display: grid;
+    padding: 2rem 1rem;
+    gap: 1.5rem;
+    background-color: rgb(39, 39, 39);
+    
+    >* {
+        color: aliceblue;
+    }
+
 }
 
 .landing-page {
@@ -184,7 +200,14 @@ button {
     }
 }
 
-.content-page {
+
+.content {
+    
+    display: grid;
+    flex-grow: 1;
+}
+
+.project-wrapper {
     max-width: 1000px;
     flex-grow: 1;
     width: 100%;
@@ -263,7 +286,8 @@ button {
         background-color: brown;
     }
 
-    input {
+    input,
+    select {
         background-color: aliceblue;
         border-top: 2px black;
         border-left: 0;
@@ -388,6 +412,12 @@ dialog,
     /* grid-area: 1/1; */
     padding: 0 1rem;
 
+}
+
+.task-deadline,
+.task-priority {
+    font-size: .7em;
+    font-weight: 300; 
 }
 
 .list-view {
@@ -599,7 +629,7 @@ dialog,
         /* background-color: rgba(225, 0, 0,.7); */
         /* transition: 1s; */
     }
-    .content-page {
+    .project-wrapper {
         grid-template-columns:  2fr 9fr 2fr;
         grid-template-rows: 0.7fr 9fr 3fr;
     }

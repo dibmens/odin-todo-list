@@ -25,8 +25,6 @@ export default class Project {
     static createNewProject(name){
         let newProject = new Project(name);
         Project.getActiveProjects().push(newProject);
-        // console.log(Project.saveProjects(Project.getActiveProjects()));
-        // console.log(newProject.stringifyProject());
         return newProject;
     }
 
@@ -70,24 +68,14 @@ export default class Project {
         } 
     }
 
-    #addNote(task,time,priority,stamp = null){
+    #addNote(task,deadline,priority,stamp = null){
         return {
             task,
-            time,
+            deadline,
             priority,
             stamp
         }
     }
-
-    // stringifyProject(){
-    //     return JSON.stringify({
-    //         "name": this.#name,
-    //         "active": this.#active,
-    //         "inbox": this.#inbox,
-    //         "outbox": this.#outbox
-    //     });
-
-    // }
 
     getProjectName(){
         return this.#name;
@@ -114,8 +102,8 @@ export default class Project {
         return Math.trunc(this.getInbox().length / taskTotal)*100;
     };
 
-    createTask(task, time = 10, priority = 1){
-        let newNote = this.#addNote(task, time, priority);
+    createTask(task, deadline = new Date(), priority = false){
+        let newNote = this.#addNote(task, deadline, priority);
         this.getInbox().push(newNote);
     };
 
@@ -152,65 +140,4 @@ export default class Project {
         this.getInbox().splice(index,1);
         this.getInbox().push(...pickedTask);
     }
-
 }
-
-// export function getActiveProjects(){
-//     return Project.activeProjects;
-// }
-
-// export function createNewProject(name){
-//     let newProject = new Project(name);
-//     Project.getActiveProjects().push(newProject);
-//     console.log(newProject);
-//     console.log(JSON.parse(newProject.stringifyProject()));
-//     return newProject;
-// }
-
-
-
-// function updateLocalStorage(){
-//     let json = JSON.stringify(getActiveProjects());
-//     localStorage.setItem("activeProjects", json);
-// }
-
-// export function fetchProjects(){
-//     if(localStorage.userProjects){
-//         activeProjects = JSON.parse(localStorage.getItem("userProjects"));
-//     }
-// }
-
-// export function storeProjects(){
-//     console.log("shit");
-//     localStorage.clear();
-//     let userProjects = [];
-//     getActiveProjects().forEach((project) => {
-//         userProjects.push(project.getProject())
-//     });
-//     let json = JSON.stringify(userProjects);
-//     localStorage.setItem("userProjects", json);
-//     console.log(localStorage.getItem("userProjects"));
-// }
-
-
-// function storeUserProjects()
-
-// function getActiveProjects2(){
-//     let storedProjects = [];
-//     let fetchedProjects = JSON.parse(localStorage.getItem("userProjects"))
-//     if(fetchProjects){
-//         fetchedProjects.forEach((project)=> {
-//             let newProject = new Project(
-//                 project.name, 
-//                 project.active,
-//                 project.inbox,
-//                 project.outbox
-//             )
-//             storeProjects.push(newProject)
-//         });
-//         return storedProjects;
-//     } else {
-//         return activeProjects;
-//     }
-// }
-

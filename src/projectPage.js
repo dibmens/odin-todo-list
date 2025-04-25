@@ -1,58 +1,45 @@
 import Project from "./userProjects";
 
-
-// let testProject = createNewProject(`Shopping List`);
-// let otherProject = createNewProject(`Test Project`);
-
-// testProject.createTask(`Do laundry`, `30 minutes`, `Medium`);
-// testProject.createTask(`Go shopping`, `Afternoon`, `If there's time`);
-// testProject.createTask(`Code`, `Evening`, `Top Priority!!!`);
-
-// otherProject.createTask(`Milk`);
-// otherProject.createTask(`Menthol Cigarets`);
-// otherProject.createTask(`Laundry Detergent`);
-// otherProject.createTask(`Potato Chips`);
-
 let openProject;
-
 
 export default function loadProjectPage(){
 
-    let content = document.querySelector(`.content-page`);
+    let content = document.querySelector(`.content`);
     let projectPage = `
-    
-    <div class="open-project-title"></div>
-    <div class="open-project">
-        <div class="box-wrapper">
-            <div class="inbox box">
+    <div class="project-wrapper">
+        <div class="open-project-title"></div>
+        <div class="open-project">
+            <div class="box-wrapper">
+                <div class="inbox box">
+                </div>
+                <div class="inbox-status">
+                    INBOX
+                </div>
             </div>
-            <div class="inbox-status">
-                INBOX
+            <div class="box-wrapper">
+                <div class="outbox box">
+                </div>
+                <div class="outbox-status">
+                    OUTBOX
+                </div>
             </div>
         </div>
-        <div class="box-wrapper">
-            <div class="outbox box">
-            </div>
-            <div class="outbox-status">
-                OUTBOX
-            </div>
-        </div>
-    </div>
-    <div class="project-bar">
-       
-    </div>
-    <div class="tool-bar">
-        <button class="tool new-note"></button>
-        <button class="tool sort-priority"></button>
-        <button class="tool sort-time"></button>
-        <button class="tool stamp-void"></button>
-        <button class="tool stamp-done"></button>  
-    </div>
-    <div class="tool-bar">
-        <button class="tool motivation"></button>
-        <button class="tool archive-project"></button>
-    </div>`;
+        <div class="project-bar">
 
+        </div>
+        <div class="tool-bar">
+            <button class="tool new-note"></button>
+            <button class="tool sort-priority"></button>
+            <button class="tool sort-time"></button>
+            <button class="tool stamp-void"></button>
+            <button class="tool stamp-done"></button>  
+        </div>
+        <div class="tool-bar">
+            <button class="tool motivation"></button>
+            <button class="tool archive-project"></button>
+        </div>
+    </div>`;
+    
     content.innerHTML = ``;
     content.insertAdjacentHTML(`afterbegin`, projectPage);
 
@@ -109,13 +96,9 @@ function projectButtonActions(){
         })
     );
     newFolderButton.addEventListener(`click`, () => {
-        // console.log(`this will create a new project`);
         openProjectForm();
     })
 }
-
-
-
 
 function loadTasks(){
     
@@ -130,10 +113,23 @@ function loadTasks(){
         
         projectInbox.forEach((task) => {
             let note = document.createElement(`div`);
+            let deadline = document.createElement(`div`);
+            let dueDate = new Date(task.deadline);
+            let priority = document.createElement(`div`);
+            let importance = 
+                task.priority == 1? "Low Priority"
+                :task.priority == 2? "" : "Top Priority!";
+            
             note.classList.add(`task`);
             note.classList.add(`note-view`);
+            deadline.classList.add(`task-deadline`);
+            priority.classList.add(`task-priority`);
             note.innerText = `${task.task}`;
+            deadline.innerText = `by ${dueDate.toDateString().slice(4,10)}`;
+            priority.innerText = `${importance}`;
             inbox.append(note);
+            note.append(deadline);
+            note.append(priority);
         });
 
         projectOutbox.forEach((task) => {
@@ -141,10 +137,8 @@ function loadTasks(){
             note.classList.add(`task`);
             note.classList.add(`note-view`);
             note.classList.add(`${task.stamp}`.toLowerCase());
-            // note.classList.add(`done`);
             note.innerText = `${task.task}`;
             outbox.append(note);
-            // console.log(task.stamp);
         });
 
         function displayInboxTaskCount(){
@@ -178,24 +172,6 @@ function loadTasks(){
             })
         }
 
-        // function toggleList(){
-        //     let taskList = document.querySelectorAll(`.task`);
-        //     taskList.forEach((task,index) => {
-        //         task.addEventListener(`click`, () => {
-        //             if(task.classList.contains(`note-view`)){
-        //                 taskList.forEach((task) => {
-        //                     task.classList.replace(`note-view`,`list-view`);
-        //                 })
-        //             } else {
-                        
-        //                 openProject.pickTask(index);
-        //                 loadTasks();
-        //                 loadProjects();
-        //             }
-        //         })
-        //     })
-        // }
-
         displayProjectTitle();
         displayInboxTaskCount();
         toggleList();
@@ -204,6 +180,7 @@ function loadTasks(){
 }
 
 function openNoteForm(){
+    let date = new Date();
     let newNote = `
     <div class="task-menu task">
         <form class="note-form" action="">
@@ -212,25 +189,19 @@ function openNoteForm(){
                 <label class="form-label" for="input-task">Task</label>
                 <input id="input-task" required>
             </div>
-            <div class="form-member time-box">
-                <label class="form-label" for="input-time">Time</label>
-                <input id="input-time" list="time">
-                <datalist id="time">
-                    <option value="5 - 15 Minutes">Quick</option>
-                    <option value="30 - 45 Minutes">Short</option>
-                    <option value="60 - 90 Minutes">Focused</option>
-                    <option value="3 - 4 Hours">Dedicated</option>
-                    <option value="All Day">Long</option>
-                </datalist>
+            <div class="form-member deadline-box">
+                <label class="form-label" for="input-deadline">Due Date</label>
+                <input type="date" id="input-deadline" 
+                min="${date.toISOString().split("T")[0]}"
+                value="${date.toISOString().split("T")[0]}">
             </div>
-            <div class="form-member importance-box">
-                <label class="form-label" for="input-importance">Importance</label>
-                <input id="input-importance" list="importance">
-                <datalist id="importance">
-                    <option value="Low">If time allows</option>
-                    <option value="Medium">Sooner or later</option>
-                    <option value="High">Essential</option>
-                </datalist>
+            <div class="form-member priority-box">
+                <label class="form-label" for="input-priority">Priority</label>
+                <select id="input-priority">
+                    <option value="1">Low</option>
+                    <option selected value="2">-</option>
+                    <option value="3">High</option>
+                </select>
             </div>
             <div class="form-button-wrap">
                 <button class="form-button create" type="submit">CREATE</button>
@@ -256,7 +227,6 @@ function openNoteForm(){
         event.preventDefault();
         if(form[0].value){
             createNote();
-            // console.log(openProject.getInbox())
         } else {
             form.reportValidity();
         }
@@ -297,13 +267,11 @@ function projectActions(){
             }
 
             if(button.classList.contains(`archive-project`)){
-                // alert("this is an archive button");
                 localStorage.clear();
                 Project.saveUserProjects();
             }
 
             if(button.classList.contains(`motivation`)){
-                // alert("this is an archive button");
                 Project.fetchUserProjects();
                 loadProjectPage();
             }
@@ -312,7 +280,7 @@ function projectActions(){
 }
 
 function openProjectForm(){
-    let content = document.querySelector(`.content-page`);
+    let content = document.querySelector(`.content`);
     let dialogWindow = document.createElement(`dialog`);
     let currentTitle = document.querySelector(`.open-project-title`).innerText;
     let form = document.createElement(`form`);
