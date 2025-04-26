@@ -29,8 +29,8 @@ export default function loadProjectPage(){
         </div>
         <div class="tool-bar">
             <button class="tool new-note"></button>
-            <button class="tool sort-priority"></button>
-            <button class="tool sort-time"></button>
+            <button class="tool edit-note"></button>
+            <button class="tool sort sort-time"></button>
             <button class="tool stamp-void"></button>
             <button class="tool stamp-done"></button>  
         </div>
@@ -117,18 +117,19 @@ function loadTasks(){
             let dueDate = new Date(task.deadline);
             let priority = document.createElement(`div`);
             let importance = 
-                task.priority == 1? "Low Priority"
-                :task.priority == 2? "" : "Top Priority!";
+                task.priority == 1? "High Priority"
+                :task.priority == 2? "" : "Low Priority";
             
             note.classList.add(`task`);
             note.classList.add(`note-view`);
             deadline.classList.add(`task-deadline`);
-            priority.classList.add(`task-priority`);
+            task.priority == 1? priority.classList.add(`task-high-priority`) 
+                :priority.classList.add(`task-low-priority`);
             note.innerText = `${task.task}`;
             deadline.innerText = `by ${dueDate.toDateString().slice(4,10)}`;
             priority.innerText = `${importance}`;
             inbox.append(note);
-            note.append(deadline);
+            note.prepend(deadline);
             note.append(priority);
         });
 
@@ -198,9 +199,9 @@ function openNoteForm(){
             <div class="form-member priority-box">
                 <label class="form-label" for="input-priority">Priority</label>
                 <select id="input-priority">
-                    <option value="1">Low</option>
+                    <option value="3">Low</option>
                     <option selected value="2">-</option>
-                    <option value="3">High</option>
+                    <option value="1">High</option>
                 </select>
             </div>
             <div class="form-button-wrap">
@@ -247,6 +248,26 @@ function projectActions(){
                 if(!document.querySelector(`.note-form`))
                 openNoteForm();
             }
+
+            if(button.classList.contains(`sort`)){
+                if(button.classList.contains(`sort-time`)){
+                    openProject.sortInbox("deadline");
+                    // openProject.sortByPriority();
+                    Project.saveUserProjects();
+                    loadTasks();
+                    button.classList.replace(`sort-time`,`sort-priority`);
+
+                } else if(button.classList.contains(`sort-priority`)){
+                    openProject.sortInbox("priority");
+                    // openProject.sortByDeadline();
+                    Project.saveUserProjects();
+                    loadTasks();
+                    button.classList.replace(`sort-priority`,`sort-time`);
+                }
+            }
+
+
+
             if(button.classList.contains(`stamp-done`)){
                 if(openProject.getInbox().length > 0){
                     openProject.stampNote(`Done`);

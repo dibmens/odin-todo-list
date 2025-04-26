@@ -414,10 +414,22 @@ dialog,
 
 }
 
-.task-deadline,
-.task-priority {
-    font-size: .7em;
-    font-weight: 300; 
+.task-deadline {
+    font-size: 0.7em;
+    font-weight: 400;
+    color: brown;
+}
+
+.task-low-priority {
+    font-size: 0.7em;
+    font-weight: 500;
+    color: grey;
+}
+
+.task-high-priority {
+    font-size: 0.7em;
+    font-weight: 500;
+    color: brown;
 }
 
 .list-view {

@@ -6,7 +6,8 @@ import loadProjectPage from './projectPage';
 
 
 menuActions();
-loadLandingPage();
+// loadLandingPage();
+loadProjectPage();
 
 
 
