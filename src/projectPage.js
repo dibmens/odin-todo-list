@@ -1,6 +1,7 @@
 import Project from "./userProjects";
 
 let openProject;
+let openIndex;
 
 export default function loadProjectPage(){
 
@@ -28,15 +29,15 @@ export default function loadProjectPage(){
 
         </div>
         <div class="tool-bar">
-            <button class="tool new-note"></button>
-            <button class="tool edit-note"></button>
-            <button class="tool sort sort-time"></button>
-            <button class="tool stamp-void"></button>
-            <button class="tool stamp-done"></button>  
+            <button class="tool inactive new-note"></button>
+            <button class="tool inactive edit-note"></button>
+            <button class="tool inactive sort sort-time"></button>
+            <button class="tool inactive stamp-void"></button>
+            <button class="tool inactive stamp-done"></button>  
         </div>
         <div class="tool-bar">
-            <button class="tool motivation"></button>
-            <button class="tool archive-project"></button>
+            <button class="tool inactive motivation"></button>
+            <button class="tool inactive archive-project"></button>
         </div>
     </div>`;
     
@@ -69,6 +70,18 @@ function loadProjects(){
         projectBar.append(projectButton);
     });
 
+    let folders = document.querySelectorAll(`.project-button`);
+    
+    folders.forEach((folder,index) => {
+        if(openProject){
+            if(index == openIndex){
+                folder.firstElementChild.classList.add(`open`);
+                alert(index);
+
+            }
+        }
+    })
+
     let newProjectButton = document.createElement(`button`);
     newProjectButton.classList.add(`new-project-button`);
     newProjectButton.innerHTML = `
@@ -81,6 +94,8 @@ function loadProjects(){
     projectBar.append(newProjectButton);
 
     projectButtonActions();
+
+    
     
 }
 
@@ -90,6 +105,7 @@ function projectButtonActions(){
     folders.forEach((button, index) => 
         button.addEventListener(`click`, () => {                
             openProject = Project.getActiveProjects()[index];
+            openIndex = index;
             loadTasks();
             folders.forEach(folder => folder.firstElementChild.classList.remove(`open`));
             button.firstElementChild.classList.add(`open`);
@@ -244,57 +260,63 @@ function openNoteForm(){
 function projectActions(){
     document.querySelectorAll(`.tool`).forEach(button => 
         button.addEventListener(`click`, () => {
-            if(button.classList.contains(`new-note`)){
-                if(!document.querySelector(`.note-form`))
-                openNoteForm();
-            }
 
-            if(button.classList.contains(`sort`)){
-                if(button.classList.contains(`sort-time`)){
-                    openProject.sortInbox("deadline");
-                    // openProject.sortByPriority();
-                    Project.saveUserProjects();
-                    loadTasks();
-                    button.classList.replace(`sort-time`,`sort-priority`);
-
-                } else if(button.classList.contains(`sort-priority`)){
-                    openProject.sortInbox("priority");
-                    // openProject.sortByDeadline();
-                    Project.saveUserProjects();
-                    loadTasks();
-                    button.classList.replace(`sort-priority`,`sort-time`);
+            if(openProject){
+                
+                if(button.classList.contains(`new-note`)){
+                    if(!document.querySelector(`.note-form`))
+                    openNoteForm();
                 }
-            }
-
-
-
-            if(button.classList.contains(`stamp-done`)){
-                if(openProject.getInbox().length > 0){
-                    openProject.stampNote(`Done`);
-                    Project.saveUserProjects();
-                    loadTasks();
-                    loadProjects();
+    
+                if(button.classList.contains(`edit-note`)){
                     
                 }
-            }
-
-            if(button.classList.contains(`stamp-void`)){
-                if(openProject.getInbox().length > 0){
-                    openProject.stampNote(`Void`);
-                    Project.saveUserProjects();
-                    loadTasks();
-                    loadProjects();
+    
+                if(button.classList.contains(`sort`)){
+                    if(button.classList.contains(`sort-time`)){
+                        openProject.sortInbox("deadline");
+                        // openProject.sortByPriority();
+                        Project.saveUserProjects();
+                        loadTasks();
+                        button.classList.replace(`sort-time`,`sort-priority`);
+    
+                    } else if(button.classList.contains(`sort-priority`)){
+                        openProject.sortInbox("priority");
+                        // openProject.sortByDeadline();
+                        Project.saveUserProjects();
+                        loadTasks();
+                        button.classList.replace(`sort-priority`,`sort-time`);
+                    }
                 }
-            }
-
-            if(button.classList.contains(`archive-project`)){
-                localStorage.clear();
-                Project.saveUserProjects();
-            }
-
-            if(button.classList.contains(`motivation`)){
-                Project.fetchUserProjects();
-                loadProjectPage();
+    
+                if(button.classList.contains(`stamp-done`)){
+                    if(openProject.getInbox().length > 0){
+                        openProject.stampNote(`Done`);
+                        Project.saveUserProjects();
+                        loadTasks();
+                        loadProjects();
+                        
+                    }
+                }
+    
+                if(button.classList.contains(`stamp-void`)){
+                    if(openProject.getInbox().length > 0){
+                        openProject.stampNote(`Void`);
+                        Project.saveUserProjects();
+                        loadTasks();
+                        loadProjects();
+                    }
+                }
+    
+                if(button.classList.contains(`archive-project`)){
+                    localStorage.clear();
+                    Project.saveUserProjects();
+                }
+    
+                if(button.classList.contains(`motivation`)){
+                    Project.fetchUserProjects();
+                    loadProjectPage();
+                }
             }
         }) 
     );

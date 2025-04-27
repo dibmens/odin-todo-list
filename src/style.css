@@ -600,9 +600,17 @@ dialog,
 
 }
 
+.inactive {
+    opacity: 50%;
+}
 
 .new-note {
     background-image: url(./assets/icons/pencil-on-paper2.svg);
+}
+
+
+.edit-note {
+    background-image: url(./assets/icons/pencil-on-paper3.svg);
 }
 
 .sort-priority{
