@@ -29,15 +29,15 @@ export default function loadProjectPage(){
 
         </div>
         <div class="tool-bar">
-            <button class="tool inactive new-note"></button>
-            <button class="tool inactive edit-note"></button>
-            <button class="tool inactive sort sort-time"></button>
-            <button class="tool inactive stamp-void"></button>
-            <button class="tool inactive stamp-done"></button>  
+            <button class="tool inactive new-note" data-tooltip = "New Task"></button>
+            <button class="tool inactive edit-note" data-tooltip = "Edit Task"></button>
+            <button class="tool inactive sort sort-time" data-tooltip = "Sort Inbox"></button>
+            <button class="tool inactive stamp-void" data-tooltip = "Delete Task"></button>
+            <button class="tool inactive stamp-done" data-tooltip = "Complete Task"></button>  
         </div>
         <div class="tool-bar">
-            <button class="tool inactive motivation"></button>
-            <button class="tool inactive archive-project"></button>
+            <button class="tool inactive motivation" data-tooltip = "Productivity"></button>
+            <button class="tool inactive archive-project" data-tooltip = "Complete Project"></button>
         </div>
     </div>`;
     
@@ -76,8 +76,6 @@ function loadProjects(){
         if(openProject){
             if(index == openIndex){
                 folder.firstElementChild.classList.add(`open`);
-                alert(index);
-
             }
         }
     })
@@ -201,7 +199,7 @@ function openNoteForm(){
     let newNote = `
     <div class="task-menu task">
         <form class="note-form" action="">
-            <div class="form-title">NEW NOTE</div>
+            <div class="form-title">NEW TASK</div>
             <div class="form-member task-box">
                 <label class="form-label" for="input-task">Task</label>
                 <input id="input-task" required>
@@ -257,6 +255,7 @@ function openNoteForm(){
     });
 };
 
+
 function projectActions(){
     document.querySelectorAll(`.tool`).forEach(button => 
         button.addEventListener(`click`, () => {
@@ -269,7 +268,28 @@ function projectActions(){
                 }
     
                 if(button.classList.contains(`edit-note`)){
-                    
+                    if(openProject.getInbox().length > 0){
+                        
+                        
+                        // let task = openProject.getInbox().at(-1);
+                        let task = openProject.getInbox().pop();
+                        loadTasks();
+                        openNoteForm()
+                        let form = document.querySelector(`.note-form`);
+
+                        form.firstElementChild.innerText = `EDIT TASK`;
+                        form[0].value = task.task;
+                        form[1].value = task.deadline;
+                        form[2].value = task.priority;
+
+                        form[4].addEventListener(`click`, ()=> {
+                            
+                            openProject.getInbox().push(task)
+                            loadTasks();
+                        })
+                        
+                    }
+
                 }
     
                 if(button.classList.contains(`sort`)){
@@ -314,8 +334,7 @@ function projectActions(){
                 }
     
                 if(button.classList.contains(`motivation`)){
-                    Project.fetchUserProjects();
-                    loadProjectPage();
+                    console.log(openProject.getInbox().at(-1))
                 }
             }
         }) 
