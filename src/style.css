@@ -208,10 +208,11 @@ button {
 }
 
 .project-wrapper {
+    /* padding: 1em; */
     justify-self: center;
     max-width: 1000px;
     flex-grow: 1;
-    width: 100%;
+    width: 95%;
     /* align-self: center; */
     display: grid;
     grid-template-columns: 1fr 8fr 1fr;
@@ -221,7 +222,8 @@ button {
     /* flex-wrap: wrap; */
 }
 
-.form-button {
+.form-button,
+.idea-button {
     justify-self: center;
     font-weight: 500;
     flex-shrink: 1;
@@ -433,11 +435,11 @@ dialog,
     color: brown;
 }
 
-.list-view {
+.inbox > .list-view {
 
     font-size: 1.8 rem;
     &:hover {
-        background-color: rgb(211, 149, 149);
+        background-color: rgb(139, 184, 156);
         margin: 0 -5px 0 5px;
         transform: rotate(5px, -1px);
     }
@@ -446,6 +448,16 @@ dialog,
 .note-view {
     font-size: 2.2rem;
     grid-area: 1/1
+   
+}
+
+.inbox > .note-view:last-of-type:hover {
+    margin-bottom: 0.3em;
+    margin-top: -0.3em;
+    /* margin-left: 0.2em;
+    margin-right: -0.2em; */
+    /* margin: 0 -5px 0 5px; */
+    /* transform: rotate(5px, -1px); */
 }
 
 .done {
@@ -456,8 +468,8 @@ dialog,
 
 }
 
-.void {
-    background-image: url(./assets/icons/stamp-void.svg);
+.delete-task {
+    background-image: url(./assets/icons/red-cross-on-paper.svg);
     background-repeat: no-repeat;
     background-size: 75%;
     background-position:50% 75%;
@@ -514,6 +526,7 @@ dialog,
 
 .task:last-child{
     transform: rotate(4deg);
+    
 }
 
 .project-bar {
@@ -577,13 +590,14 @@ dialog,
 }
 
 .tool-bar {
+    padding-top: 2em;
     grid-column: 1;
     grid-row: 2;
     display: grid;
     grid-template-rows: repeat(6,1fr);
     /* padding: 1rem; */
     min-width: 1rem;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 .tool-bar:last-of-type {
@@ -591,7 +605,7 @@ dialog,
 }
 
 .tool {
-    margin: 0.5rem 0;
+    padding: 0 1rem;
     background-repeat: no-repeat;
     background-size: contain;
     background-position:center;
@@ -621,16 +635,16 @@ dialog,
 
 .sort-time {
     background-image: url(./assets/icons/time-slow.svg);
-    grid-row: 3;
+    /* grid-row: 4; */
 }
 
-.motivation {
+.ideas {
     background-image: url(./assets/icons/idea.svg);
     /* grid-row: 4; */
 }
 
-.stamp-void {
-    background-image: url(./assets/icons/red-arrow.svg);
+.delete-task {
+    background-image: url(./assets/icons/red-cross-on-paper.svg);
 }
 
 .stamp-done {
@@ -646,12 +660,15 @@ dialog,
 
 
 
+
+
 @media screen and ( max-width: 900px){
     body {
         /* background-color: rgba(225, 0, 0,.7); */
         /* transition: 1s; */
     }
     .project-wrapper {
+        width: 100%;
         grid-template-columns:  2fr 9fr 2fr;
         grid-template-rows: 0.7fr 9fr 3fr;
     }
@@ -683,7 +700,7 @@ dialog,
         grid-template-rows: repeat(8,1fr);
         gap:1em;
         align-content: start;
-        padding: 1em .5em;
+        padding: 1em .5em 1em 0;
     }
 
     .tool-bar:last-of-type {
@@ -693,15 +710,16 @@ dialog,
 
 
     .tool {
-        background-size: 90%;
-        max-width: 3em;
+        background-size: contain;
+        /* justify-self: left; */
+        /* max-width: 2em; */
 
         &:hover {
             background-size: contain;
         }
     }
 
-    .motivation {
+    .ideas {
         grid-row:2;
     }
     .archive-project {
@@ -711,6 +729,7 @@ dialog,
         grid-column: 2/3;
         grid-row: 2/4;
         padding: 0 1em 0 0.5em;
+        /* padding: 1em; */
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr;
     }
@@ -747,13 +766,36 @@ dialog,
         margin-bottom: 0;
     }
 
+    /* .tool:hover::before {
+        left: 5em;
+    } */
+
 }
 
-
-
-/* .tool:hover::after {
+.tool:hover::after {
+    font-size: 0.8rem;
+    background-color: rgba(39, 39, 39, 0.7);
+    border-radius: 3px;
+    padding: 3px;
+    color: aliceblue;
     content: attr(data-tooltip);
+    position: relative;
+    display: inline-block;
+    bottom: -2.8rem;
+    max-width: 10rem;
+}
+
+.idea-window {
     position: absolute;
-    display: flex;
-    top: 3em;
-} */
+    bottom:3.5em;
+    background-color: rgba(39, 39, 39, 0.95);
+    border-radius: 2px;
+    color: aliceblue;
+    font-weight: 300;
+    padding: 0.5em;
+    margin: 0 1em;
+}
+
+.idea-button {
+    margin-top: -1em;
+}

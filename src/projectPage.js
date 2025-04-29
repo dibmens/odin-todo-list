@@ -1,4 +1,5 @@
 import Project from "./userProjects";
+import Ideas from "./data/ideas.json";
 
 let openProject;
 let openIndex;
@@ -31,13 +32,13 @@ export default function loadProjectPage(){
         <div class="tool-bar">
             <button class="tool inactive new-note" data-tooltip = "New Task"></button>
             <button class="tool inactive edit-note" data-tooltip = "Edit Task"></button>
+            <button class="tool inactive delete-task" data-tooltip = "Delete Task"></button>
             <button class="tool inactive sort sort-time" data-tooltip = "Sort Inbox"></button>
-            <button class="tool inactive stamp-void" data-tooltip = "Delete Task"></button>
             <button class="tool inactive stamp-done" data-tooltip = "Complete Task"></button>  
         </div>
         <div class="tool-bar">
-            <button class="tool inactive motivation" data-tooltip = "Productivity"></button>
-            <button class="tool inactive archive-project" data-tooltip = "Complete Project"></button>
+            <button class="tool inactive ideas" data-tooltip = "Ideas"></button>
+            <button class="tool inactive archive-project" data-tooltip = "Archive Project"></button>
         </div>
     </div>`;
     
@@ -270,8 +271,6 @@ function projectActions(){
                 if(button.classList.contains(`edit-note`)){
                     if(openProject.getInbox().length > 0){
                         
-                        
-                        // let task = openProject.getInbox().at(-1);
                         let task = openProject.getInbox().pop();
                         loadTasks();
                         openNoteForm()
@@ -281,7 +280,7 @@ function projectActions(){
                         form[0].value = task.task;
                         form[1].value = task.deadline;
                         form[2].value = task.priority;
-
+                        form[3].innerText = `UPDATE`;
                         form[4].addEventListener(`click`, ()=> {
                             
                             openProject.getInbox().push(task)
@@ -291,18 +290,24 @@ function projectActions(){
                     }
 
                 }
-    
+                
+                if(button.classList.contains(`delete-task`)){
+                    if(openProject.getInbox().length > 0){
+                        openProject.getInbox().pop();
+                        loadTasks();
+                        loadProjects();
+                    }
+                }
+
                 if(button.classList.contains(`sort`)){
                     if(button.classList.contains(`sort-time`)){
                         openProject.sortInbox("deadline");
-                        // openProject.sortByPriority();
                         Project.saveUserProjects();
                         loadTasks();
                         button.classList.replace(`sort-time`,`sort-priority`);
     
                     } else if(button.classList.contains(`sort-priority`)){
                         openProject.sortInbox("priority");
-                        // openProject.sortByDeadline();
                         Project.saveUserProjects();
                         loadTasks();
                         button.classList.replace(`sort-priority`,`sort-time`);
@@ -319,22 +324,31 @@ function projectActions(){
                     }
                 }
     
-                if(button.classList.contains(`stamp-void`)){
-                    if(openProject.getInbox().length > 0){
-                        openProject.stampNote(`Void`);
-                        Project.saveUserProjects();
-                        loadTasks();
-                        loadProjects();
-                    }
-                }
-    
                 if(button.classList.contains(`archive-project`)){
                     localStorage.clear();
                     Project.saveUserProjects();
                 }
     
-                if(button.classList.contains(`motivation`)){
-                    console.log(openProject.getInbox().at(-1))
+                if(button.classList.contains(`ideas`)){
+                    function randomIdea(){
+                        return Ideas[Math.trunc(Math.random()*Ideas.length)]
+                    }
+
+                    let ideaWindow = document.createElement(`dialog`);
+                    ideaWindow.classList.add(`idea-window`)
+                    ideaWindow.innerHTML = `
+                    <p>${randomIdea()}</p>
+                    <button class="idea-button">CLOSE</button>
+                    `;
+                    document.querySelector(`.footer`).prepend(ideaWindow);
+                    ideaWindow.show();
+
+                    let button = document.querySelector(`.idea-button`);
+                    button.addEventListener(`click`, ()=> {
+                        ideaWindow.close();
+                    })
+
+
                 }
             }
         }) 
