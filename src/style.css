@@ -119,6 +119,11 @@ button {
         color: aliceblue;
     }
 
+    >*:hover {
+        transform: translate(0px, -1px);
+        text-decoration: underline;
+    }
+
 }
 
 .landing-page {
@@ -222,6 +227,8 @@ button {
     /* flex-wrap: wrap; */
 }
 
+.confirm-button,
+.cancel-button,
 .form-button,
 .idea-button {
     justify-self: center;
@@ -243,6 +250,9 @@ button {
 
 }
 
+.cancel-button {
+    background-color: brown;
+}
 
 .task-menu {
 
@@ -410,7 +420,8 @@ dialog,
     border: 1px solid rgba(0,0,0,.2);
     box-shadow: 3px 3px rgba(0,0,0,.4), 8px 3px rgba(0,0,0,.1), inset 25px 20px 30px rgba(0,0,0,.1);
     text-align: center;
-    font-weight: 600;
+    /* font-size: 0.5em; */
+    font-weight: 500;
     align-content: center;
     /* grid-area: 1/1; */
     padding: 0 1rem;
@@ -421,6 +432,12 @@ dialog,
     font-size: 0.7em;
     font-weight: 400;
     color: brown;
+}
+
+.task-completion {
+    font-size: 0.7em;
+    font-weight: 400;
+    color:darkgreen;
 }
 
 .task-low-priority {
@@ -437,7 +454,7 @@ dialog,
 
 .inbox > .list-view {
 
-    font-size: 1.8 rem;
+    font-size: 1.3 rem;
     &:hover {
         background-color: rgb(139, 184, 156);
         margin: 0 -5px 0 5px;
@@ -446,14 +463,14 @@ dialog,
 }
 
 .note-view {
-    font-size: 2.2rem;
+    font-size: 2rem;
     grid-area: 1/1
    
 }
 
 .inbox > .note-view:last-of-type:hover {
-    margin-bottom: 0.3em;
-    margin-top: -0.3em;
+    /* margin-bottom: 5px; */
+    /* margin-top: -5px; */
     /* margin-left: 0.2em;
     margin-right: -0.2em; */
     /* margin: 0 -5px 0 5px; */
@@ -463,7 +480,7 @@ dialog,
 .done {
     background-image: url(./assets/icons/stamp-done.svg);
     background-repeat: no-repeat;
-    background-size: 75%;
+    background-size: 55%;
     background-position:50% 75%;
 
 }
@@ -750,7 +767,7 @@ dialog,
 
     .task {
         padding: 0.3rem;
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
 
     .note-form {
@@ -760,6 +777,10 @@ dialog,
             position: ;
             
         }
+    }
+
+    .list-view {
+        font-size: 1em;
     }
 
     .form-title {
@@ -779,11 +800,20 @@ dialog,
     padding: 3px;
     color: aliceblue;
     content: attr(data-tooltip);
-    position: relative;
+    position: absolute;
     display: inline-block;
-    bottom: -2.8rem;
+    bottom: -1.5rem;
+    right: 1rem;
     max-width: 10rem;
 }
+
+.confirmation-window{
+    background-color: rgba(39, 39, 39, 0.95);
+    border-radius: 2px;
+    color: aliceblue;
+    padding: 1em;
+}
+
 
 .idea-window {
     position: absolute;
@@ -793,9 +823,63 @@ dialog,
     color: aliceblue;
     font-weight: 300;
     padding: 0.5em;
+    padding-bottom: 1.5em;
     margin: 0 1em;
 }
-
 .idea-button {
     margin-top: -1em;
 }
+
+.archive-window {
+
+    background-color: aliceblue;
+    border: 1px solid rgba(0,0,0,.2);
+    box-shadow: 3px 3px rgba(0,0,0,.4), 8px 3px rgba(0,0,0,.1), inset 25px 20px 30px rgba(0,0,0,.1);
+    text-align: center;
+    font-weight: 400;
+    align-content: center;
+    /* grid-area: 1/1; */
+    padding-bottom: 1rem;
+
+    h2 {
+        font-weight: 500;
+    }
+    
+    h4 {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(39, 39, 39, 0.7);
+    }
+
+    .archived-project {
+        /* background-color: gray; */
+        /* margin: 1em; */
+        padding: 0 1em;
+        text-align: start;
+
+        &#text {
+            font-size: 2em;
+        }
+    }
+    
+    .archived-task {
+        display: flex;
+        gap: 0 1em;
+    }
+    
+    .archived-task-date,
+    .archived-task-title {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .archived-task-date {
+        color: green;
+    }
+
+    .archived-task-title {
+        text-align: start;
+    }
+
+}
+

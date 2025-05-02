@@ -22,6 +22,10 @@ export default class Project {
         return Project.#archivedProjects;
     }
 
+    static archiveProject(index){
+        Project.#activeProjects[index].#active = false;
+    }
+
     static createNewProject(name){
         let newProject = new Project(name);
         Project.getActiveProjects().push(newProject);
@@ -154,7 +158,9 @@ export default class Project {
     stampNote(stamp = "done"){
         if(this.getInbox().length > 0){
             let finishedTask = this.getInbox().pop();
+            let completionDate = new Date;
             finishedTask.stamp = stamp;
+            finishedTask.deadline = completionDate.toISOString().split("T")[0];
             this.getOutbox().push(finishedTask);
         };
     }

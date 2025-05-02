@@ -150,10 +150,15 @@ function loadTasks(){
 
         projectOutbox.forEach((task) => {
             let note = document.createElement(`div`);
+            let completionDate = document.createElement(`div`);
+            let doneDate = new Date(task.deadline);
             note.classList.add(`task`);
             note.classList.add(`note-view`);
+            completionDate.classList.add(`task-completion`);
             note.classList.add(`${task.stamp}`.toLowerCase());
             note.innerText = `${task.task}`;
+            completionDate.innerText = `completed on ${doneDate.toDateString().slice(4,10)}`;
+            note.prepend(completionDate);
             outbox.append(note);
         });
 
@@ -256,7 +261,6 @@ function openNoteForm(){
     });
 };
 
-
 function projectActions(){
     document.querySelectorAll(`.tool`).forEach(button => 
         button.addEventListener(`click`, () => {
@@ -286,16 +290,44 @@ function projectActions(){
                             openProject.getInbox().push(task)
                             loadTasks();
                         })
-                        
                     }
-
                 }
                 
                 if(button.classList.contains(`delete-task`)){
                     if(openProject.getInbox().length > 0){
-                        openProject.getInbox().pop();
-                        loadTasks();
-                        loadProjects();
+
+                        if(document.querySelector(`.confirmation-window`)){
+                            document.querySelector(`.confirmation-window`).remove();
+                        }
+
+                        let confirmationWindow = document.createElement(`dialog`);
+                        confirmationWindow.classList.add(`confirmation-window`)
+                        confirmationWindow.innerHTML = `
+                        <p>Delete current task?</p>
+                        <div>
+                            <button class="confirm-button">DELETE</button>
+                            <button class="cancel-button">CANCEL</button>
+                        </div>
+                        `;
+                        document.querySelector(`.header`).append(confirmationWindow);
+                        confirmationWindow.showModal();
+
+                        let confirm = document.querySelector(`.confirm-button`);
+                        let cancel = document.querySelector(`.cancel-button`);
+
+                        confirm.addEventListener(`click`, ()=> {
+                            
+                            openProject.getInbox().pop();
+                            Project.saveUserProjects();
+                            loadTasks();
+                            loadProjects();
+                            confirmationWindow.close();
+                            
+                        })
+
+                        cancel.addEventListener(`click`, ()=> {
+                            confirmationWindow.close();
+                        })
                     }
                 }
 
@@ -320,24 +352,62 @@ function projectActions(){
                         Project.saveUserProjects();
                         loadTasks();
                         loadProjects();
-                        
                     }
                 }
     
                 if(button.classList.contains(`archive-project`)){
-                    localStorage.clear();
-                    Project.saveUserProjects();
+
+                    if(document.querySelector(`.confirmation-window`)){
+                        document.querySelector(`.confirmation-window`).remove();
+                    }
+
+                    let confirmationWindow = document.createElement(`dialog`);
+                    confirmationWindow.classList.add(`confirmation-window`)
+                    confirmationWindow.innerHTML = `
+                    <p>Archive the current project?</p>
+                    <div>
+                        <button class="confirm-button">ARCHIVE</button>
+                        <button class="cancel-button">CANCEL</button>
+                    </div>
+                    `;
+                    document.querySelector(`.header`).append(confirmationWindow);
+                    confirmationWindow.showModal();
+
+                    let confirm = document.querySelector(`.confirm-button`);
+                    let cancel = document.querySelector(`.cancel-button`);
+
+                    confirm.addEventListener(`click`, ()=> {
+                        document.querySelectorAll(`.project-button`).forEach((project, index) => {
+                            if(project.firstElementChild.classList.contains(`open`)){
+                                confirmationWindow.close();
+                                Project.archiveProject(index);
+                                Project.saveUserProjects();
+                                location.reload();
+                            }
+                        })
+                    })
+
+                    cancel.addEventListener(`click`, ()=> {
+                        confirmationWindow.remove();
+                        // alert(`not this shit again`);
+                    })
                 }
     
                 if(button.classList.contains(`ideas`)){
-                    function randomIdea(){
-                        return Ideas[Math.trunc(Math.random()*Ideas.length)]
+                    if(document.querySelector(`.idea-window`)){
+                        document.querySelector(`.idea-window`).remove();
+                    }
+                    
+                    function numGen(){
+                        return Math.trunc(Math.random()*Ideas.length);
                     }
 
                     let ideaWindow = document.createElement(`dialog`);
+                    let index = numGen();
                     ideaWindow.classList.add(`idea-window`)
                     ideaWindow.innerHTML = `
-                    <p>${randomIdea()}</p>
+                    <h4>${Ideas[index].title}</h4>
+                    <p>${Ideas[index].idea}</p>
                     <button class="idea-button">CLOSE</button>
                     `;
                     document.querySelector(`.footer`).prepend(ideaWindow);

@@ -1,5 +1,28 @@
-[
-    "Whenever work feels boring, overwhelming, and with no immediately obvious solutions, our mind, as a coping mechanism, instinctively looks for an an escape, a distraction, a more readily available source of dopamine. We've come to call this mechanism simply as `Procrastination`. Recognize that you are not lazy. Instead, consider how a boring chore can be made more fun, an overwhelming project can be split in smaller tasks and everything you've learned up to this point once felt just as out of reach as the solutions that escape you now",
-    "The hardest part of any endeavour is getting started. Do not overwhelm yourself with the idea that you must engage in a new project for hours each day, come rain or shine. Instead, begin with 15-30 minutes and add 5-15 minutes each day on top of it. Just like with muscles, a brain needs to be given time to get used to the new work-load",
-    "As people moved from fields and factories to sedentary lifestyles of offices and cars, our level of physical fitness deteriorated rapidly. As a result, a whole new movement of fitness lifestyle arouse in an effort combat growing rates of obesity and joint pain. Whether lifting weights in a gym, doing calisthenics or simply going for a brisk walk, we have collectively agreed to put ourselves back into shape. With the advent of the smartphone, our level of cognitive ability has similarly suffered, with people's mental health and ability to focus reaching historic lows. Solution? Calisthenics for the brain. Spend more time with the smartphone in the other room. Engage with your own thoughts more often. Read and learn new things regularly. The best part? A brisk daily walk with benefit both the body and the brain"
+[   
+    {
+        "title": "The Laziness Myth",
+        "idea": "Know this. You are not lazy. Procrastination is a complex anxiety driven coping mechanism caused by seemingly difficult and time consuming work we have to endure in the immediate future. A to-do list is your first and most reliable tool of combating procrastination. The act of listing off the necessary steps, drawing out the work schedule and giving yourself breathing room for leisure will help you conquer even the most daunting of obligations."
+    },
+    {
+        "title": "The Reverse Calendar",
+        "idea": "An effective way to plan your to-do list is to employ the reverse calendar method. Take the final deadline for when the project must be turned in and write down the necessary tasks to see its completion, giving each task its own individual deadline, essentially dividing the project in smaller, easier to tackle mini-projects and giving you exact timeline of events."
+    },
+    {
+        "title": "Slow and steady wins the race",
+        "idea": "Productivity is never about big leaps in motivation outside of short passion projects, but rather an accumulated growth accrued over months and years of steady effort. Just mere 30 minutes a day over the span of a year means 180 hours of quality work. That's a month's worth of a full time job, seemingly out of thin air!"
+    },
+    {
+        "title": "It's the little things",
+        "idea": "To keep your living and working space in order and clean of clutter and piled up chores, a good mantra to remind yourself- if I can do it in 5 minutes, I can do it now. A life changer!"
+    },
+
+    {
+        "title":"Mind is a muscle",
+        "idea":"The hardest part of any endeavour is getting started. Do not overwhelm yourself with the idea that you must engage in hard work for hours each day, come rain or shine. Instead, begin with 15-30 minutes and add another 5-10 minutes each day on top of it. Just like with muscles, our brains need to be given time to get used to heavier work-loads, and just like with muscles, we all have our growth rate and strength plateaus, and just like with muscles, going too heavy will lead to injury- a burnout."
+    },
+
+    {
+        "title":"Gym for the mind",
+        "idea":"As people moved from fields and factories to sedentary lifestyles of offices and cars, our level of physical fitness deteriorated rapidly. As a result, a whole new movement of fitness lifestyle arouse in an effort to combat growing rates of obesity, heart failure and back pain. Whether lifting weights in a gym, doing calisthenics or simply going for a brisk walk, we have collectively agreed to put ourselves back into shape. With the advent of the smartphone, our level of cognitive ability has similarly suffered, with people's mental health and ability to focus reaching historic lows. Solution? Calisthenics for the brain. Try and leave your smartphone in the other room for couple hours of day. Engage with your own thoughts more often. Read and learn new things regularly. The best part? A daily walk outside can benefit both the body and the brain at the same time."
+    }
 ]
