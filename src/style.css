@@ -641,7 +641,6 @@ dialog,
     background-image: url(./assets/icons/pencil-on-paper2.svg);
 }
 
-
 .edit-note {
     background-image: url(./assets/icons/pencil-on-paper3.svg);
 }
@@ -668,14 +667,14 @@ dialog,
     background-image: url(./assets/icons/green-arrow.svg);
 }
 
-
-
 .archive-project {
     background-image: url(./assets/icons/archive-project.svg);
     /* grid-row: 5; */
 }
 
-
+.rename-project {
+    background-image: url(./assets/icons/pencil-on-project.svg);
+}
 
 
 
@@ -883,3 +882,19 @@ dialog,
 
 }
 
+#title-input{
+    background-color: rgb(197,196,196);
+    border:none;
+    font-size: 1em;
+    /* border-bottom: 2px solid black; */
+    align-self: center;
+    text-align: center;
+    font-weight:700;
+    grid-column: 2;
+
+    &:active {
+        border: none;
+    }
+
+
+}

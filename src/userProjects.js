@@ -85,6 +85,10 @@ export default class Project {
         return this.#name;
     };
 
+    setProjectName(newName){
+        this.#name = newName;
+    }
+
     getProjectActivity(){
         return this.#active;
     }

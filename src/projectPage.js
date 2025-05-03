@@ -37,8 +37,9 @@ export default function loadProjectPage(){
             <button class="tool inactive stamp-done" data-tooltip = "Complete Task"></button>  
         </div>
         <div class="tool-bar">
-            <button class="tool inactive ideas" data-tooltip = "Ideas"></button>
+            <button class="tool inactive rename-project" data-tooltip="Rename Project"></button>
             <button class="tool inactive archive-project" data-tooltip = "Archive Project"></button>
+            <button class="tool inactive ideas" data-tooltip = "Ideas"></button>
         </div>
     </div>`;
     
@@ -354,6 +355,34 @@ function projectActions(){
                         loadProjects();
                     }
                 }
+
+                if(button.classList.contains(`rename-project`)){
+                    let projectTitle = document.querySelector(`.open-project-title`)
+                    let renameWindow = document.createElement(`form`);
+                    renameWindow.classList.add(`.rename-form`);
+                    renameWindow.innerHTML = `
+                        <input id="title-input" required></input>
+                    `;
+                    projectTitle.innerHTML = ``;
+                    projectTitle.append(renameWindow);
+                    renameWindow[0].value = `${openProject.getProjectName().toUpperCase()}`;
+                    renameWindow[0].focus();
+                    
+                    renameWindow[0].addEventListener(`focusout`, (event)=>{
+                        event.preventDefault;
+                        if(renameWindow.reportValidity()){
+                            projectTitle.innerHTML = `${renameWindow[0].value.toUpperCase()}`;
+                            document.querySelectorAll(`.project-button-icon`).forEach((folder,index)=> {
+                                if(folder.classList.contains(`open`)){
+                                    Project.getActiveProjects()[index].setProjectName(renameWindow[0].value);
+                                    Project.saveUserProjects();
+                                    loadProjectPage();
+                                }
+                            })
+                        }
+                    })
+                }
+
     
                 if(button.classList.contains(`archive-project`)){
 
@@ -432,7 +461,7 @@ function openProjectForm(){
     let form = document.createElement(`form`);
     form.classList.add(`project-form`);
     form.innerHTML = `
-            <label for="project title">Enter Project Title</label>
+            <label for="project-title">Enter Project Title</label>
             <input id="project-title" placeholder="My Project" required >
             <div class="form-button-wrap">
                 <button class="form-button create-project">CREATE</button>
