@@ -1,26 +1,26 @@
 [
     {
         "tagline":"A to-do list that helps you do",
-        "pitch":"Have your to-do lists ballooned to unmanageable sizes, filled with half-baked ideas, far-off goals and old chores that have spent months collecting dust?<br><br> Why not try a new productivity tool supported by modern psychology- an <b>atomic</b> approach! A to-do list that helps you focus on each small step at a time on your quest to accomplishing great things!"
+        "pitch":"Have your to-do lists ballooned to unmanageable sizes, filled with half-baked ideas, far-off goals and moths old chores that have neglected for months?<br><br> Why not try a new productivity tool aimed at <b>simplifying</b> and <b>focusing</b> your task scheduling in order to see your personal and professional projects to completion!<br><br> <b>INDOUT</b> is just such a tool!"
     },
     {
         "tagline":"Stay focused on the task at hand",
-        "pitch":"Doing many things at once often ends with not finishing a single thing as your attention jumps from one task to another while the clock mercilessly marches on.<br><br>Don't let the upcoming tasks and projects occupy your time and mind-space. Our unique approach makes sure you <b>stay focused on one thing and one thing only.</b>"
+        "pitch":"Doing many things at once often ends with not finishing a single thing as your attention jumps from one task to another as the deadline approaches.<br><br>Don't let the upcoming and less important tasks and projects occupy your time and mind-space. Our approach makes sure you <b>stay focused on one thing and one thing only.</b>"
     },
     {
         "tagline":"Do the right things at the right time",
-        "pitch":"Get most of your productivity by sorting your scheduled items by importance or time it will take to accomplish them, making sure you <b>always make good progress no matter the circumstances.</b>"
+        "pitch":"Get most of your productivity by sorting your tasks by priority or the dates you want to see individual tasks be completed, making sure you <b>always make good progress and stay on schedule.</b>"
     },
     {
-        "tagline":"Stay motivated with practical advice",
-        "pitch":"Nothing worth doing is easy. When you will lose focus and motivation, we will be here to help you overcome procrastination with time-tested practical advice."
+        "tagline":"Stay motivated when you most need it",
+        "pitch":"<b>Nothing worth doing is easy</b>. Whenever you lose focus and motivation, we will be there for you to share practical productivity advice with out <b>IDEAS</b> feature."
     },
     {
-        "tagline":"Bring closure to your work-day",
+        "tagline":"Bring closure to your tasks",
         "pitch":"Own your day by bringing it to closure, with all its successes and failures. We strongly believe in not hanging on to old baggage. Your <b>to-do lists should be in-and-out</b>. Forget about yesterday and be ready to take on new challenges tomorrow."
     },
     {
-        "tagline":"Reflect on your long-term productivity",
-        "pitch":"Store all your little daily accomplishments in a big list to see how truly productive you've become and how much you've achieved over time. Let this success drive you forward!"
+        "tagline":"Celebrate your accomplishments",
+        "pitch":"We store all your completed tasks and projects in an archive list so you can look back at how truly productive you've been and how much you've achieved over time. Let this sense of accomplishment drive you forward!"
     }
 ]

@@ -8,6 +8,7 @@ export default function loadLandingPage(){
 
     content.innerHTML = ``;
     landingPage.className = `landing-page`;
+    landingPage.innerHTML = ``;
     // header.after(landingPage);
     content.append(landingPage);
 

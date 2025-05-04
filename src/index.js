@@ -6,11 +6,7 @@ import loadProjectPage from './projectPage';
 
 
 menuActions();
-// loadLandingPage();
-loadProjectPage();
-
-
-
+loadLandingPage();
 
 function menuActions(){
     let menuButton = document.querySelector(".settings");
@@ -73,7 +69,6 @@ function loadArchive(){
     archiveWindow.innerHTML = `
         <h2>Project Archive</h2>
     `
-
 
     Project.getArchivedProjects().forEach((project) => {
         let projectTitle = document.createElement(`div`);
