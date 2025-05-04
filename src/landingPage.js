@@ -9,10 +9,7 @@ export default function loadLandingPage(){
     content.innerHTML = ``;
     landingPage.className = `landing-page`;
     landingPage.innerHTML = ``;
-    // header.after(landingPage);
     content.append(landingPage);
-
-// Populate the page with taglines
 
     Data.forEach((tagline) => {
         let div = document.createElement(`div`);
@@ -30,12 +27,6 @@ export default function loadLandingPage(){
     secondTagline.before(button);
     let secondButton = button.cloneNode(true);
     landingPage.append(secondButton);
-
-// Buttons linking to the Projects page
-
-    // document.querySelectorAll(`.start-button`).forEach((button)=> 
-    //     button.addEventListener(`click`, ()=> 
-    //         loadProjectPage()));
 
     document.querySelectorAll(`.start-button`).forEach((button)=> 
         button.addEventListener(`click`, function (){

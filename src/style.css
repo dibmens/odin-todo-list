@@ -197,7 +197,6 @@ button {
         padding: 5px 20px 8px 20px;
 
         &:hover {
-            /* padding:  0.5rem 0.7rem; */
             box-shadow: 1px 1px 2px black;
             transform: translate(0px, -2px);
         }
@@ -214,18 +213,12 @@ button {
 }
 
 .project-wrapper {
-    /* padding: 1em; */
     justify-self: center;
     max-width: 950px;
     flex-grow: 1;
-    /* width: 90%; */
-    /* align-self: center; */
     display: grid;
     grid-template-columns: 1fr 8fr 1fr;
     grid-template-rows: .8fr 6fr 3fr;
-    /* flex-direction: column; */
-    /* justify-content:start; */
-    /* flex-wrap: wrap; */
 }
 
 .confirm-button,
@@ -260,20 +253,14 @@ button {
     background-color: aliceblue;
     border: 1px solid rgba(0,0,0,0.2);
     box-shadow: 3px 3px rgba(0,0,0,0.4), 8px 3px rgba(0,0,0,0.1), inset 25px 20px 30px rgba(0,0,0,.1);
-    /* width: 90%; */
-    /* height: 90%; */
     text-align: center;
     font-weight: 500;
     font-size: 1.2rem;
     align-content: center;
     grid-area: 1/1;
-    /* position: absolute; */
-    /* transition: background-image 1s; */
 
     .note-form {
         display: grid;
-        /* flex-direction: column; */
-        /* justify-items: center; */
         justify-content: center;
         gap: 0.4rem;
         padding: 1rem 0;
@@ -289,12 +276,6 @@ button {
         display: grid;
         gap: 0.4rem;
     }
-
-    .form-button-wrap {
-        /* padding-top: 10px; */
-    }
-
-    
 
     .cancel {
         background-color: brown;
@@ -342,7 +323,6 @@ button {
     align-self: center;
     text-align: center;
     font-weight:700;
-    /* font-size: 2vw; */
     grid-column: 2;
     font-size: 2.6em;
     text-overflow: center;
@@ -350,7 +330,6 @@ button {
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 0 1em;
-    /* order: -1; */
 }
 
 .open-project {
@@ -427,10 +406,8 @@ dialog,
     border: 1px solid rgba(0,0,0,.2);
     box-shadow: 3px 3px rgba(0,0,0,.4), 8px 3px rgba(0,0,0,.1), inset 25px 20px 30px rgba(0,0,0,.1);
     text-align: center;
-    /* font-size: 0.5em; */
     font-weight: 500;
     align-content: center;
-    /* grid-area: 1/1; */
     padding: 0 1rem;
 
 }
@@ -475,14 +452,6 @@ dialog,
    
 }
 
-.inbox > .note-view:last-of-type:hover {
-    /* margin-bottom: 5px; */
-    /* margin-top: -5px; */
-    /* margin-left: 0.2em;
-    margin-right: -0.2em; */
-    /* margin: 0 -5px 0 5px; */
-    /* transform: rotate(5px, -1px); */
-}
 
 .done {
     background-image: url(./assets/icons/stamp-done.svg);
@@ -562,7 +531,6 @@ dialog,
     grid-auto-flow: row;
     justify-content: center;
     align-content: stretch;
-    /* overflow-y: auto; */
 }
 
 .project-button,
@@ -624,7 +592,6 @@ dialog,
     grid-row: 2;
     display: grid;
     grid-template-rows: repeat(6,1fr);
-    /* padding: 1rem; */
     min-width: 1rem;
     gap: 1.7rem;
 }
@@ -649,9 +616,6 @@ dialog,
     grid-row: 5;
 }
 
-/* .inactive {
-    opacity: 50%;
-} */
 
 .new-note {
     background-image: url(./assets/icons/pencil-on-paper2.svg);
@@ -705,10 +669,8 @@ dialog,
     color: aliceblue;
     content: attr(data-tooltip);
     position: absolute;
-    /* display: inline-block; */
     bottom: -1.5rem;
     right: 1.5rem;
-    /* max-width: 10rem; */
 }
 
 .confirmation-window{
@@ -742,7 +704,6 @@ dialog,
     text-align: center;
     font-weight: 400;
     align-content: center;
-    /* grid-area: 1/1; */
     padding-bottom: 1rem;
 
     h2 {
@@ -756,8 +717,6 @@ dialog,
     }
 
     .archived-project {
-        /* background-color: gray; */
-        /* margin: 1em; */
         padding: 0 1em;
         text-align: start;
 
@@ -791,7 +750,6 @@ dialog,
     background-color: rgb(197,196,196);
     border:none;
     font-size: 1em;
-    /* border-bottom: 2px solid black; */
     align-self: center;
     text-align: center;
     font-weight:700;
@@ -805,10 +763,6 @@ dialog,
 }
 
 @media screen and ( max-width: 900px){
-    body {
-        /* background-color: rgba(225, 0, 0,.7); */
-        /* transition: 1s; */
-    }
     .project-wrapper {
         width: 100%;
         grid-template-columns:  2.5fr 9fr 2fr;
@@ -829,59 +783,39 @@ dialog,
 
     .project-button
     .new-project-button {
-        /* grid-template-rows: 0.1fr 2fr 1fr; */
         gap: 0;
-        /* padding: .5em .5em .8em .5em; */
-    }
-    .project-button-icon {
-        /* height: 50%; */
-    }
-
-    .project-button-title {
-        /* font-size: 1em; */
     }
 
     .tool-bar {
         grid-row: 2/3;
         grid-column: 3;
         grid-template-rows: repeat(5,1fr);
-        /* gap:2em; */
         align-content: start;
         padding: 1em .5em 1em 0;
         margin-bottom: 2em;
     }
 
     .tool-bar:last-of-type {
-        /* grid-template-rows: repeat(3,1fr); */
         grid-row: 3/4;
     }
 
 
     .tool {
         background-size: contain;
-        /* justify-self: left; */
-        /* max-width: 2em; */
 
         &:hover {
             background-size: contain;
         }
     }
 
-    .rename-project {
-        /* grid-row: 0; */
-    }
 
     .ideas {
         grid-row:5;
-    }
-    .archive-project {
-        /* grid-row: 2; */
     }
     .open-project {
         grid-column: 2/3;
         grid-row: 2/4;
         padding: 0 1em 0 0.5em;
-        /* padding: 1em; */
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr;
     }
@@ -890,14 +824,9 @@ dialog,
         grid-row: 1;
         grid-column: 2;
         font-size: 1.5em;
-        /* align-self: start; */
         padding-top: .2em;
-        /* order: 0; */
     }
 
-    /* .title-input {
-        max-width: 50px;
-    } */
 
     #title-input {
         background-color: aliceblue;
@@ -930,8 +859,5 @@ dialog,
         margin-bottom: 0;
     }
 
-    /* .tool:hover::before {
-        left: 5em;
-    } */
 
 }

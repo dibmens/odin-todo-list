@@ -118,46 +118,12 @@ export default class Project {
     sortInbox(key){
         let inbox = this.getInbox();
 
-        // console.log(inbox);
-
-        // function isSorted(){
-        //     let testArray = [];
-        //     for(let i = 0; i < inbox.length-1; i++){
-        //         testArray.push(inbox[i][key] < inbox[i+1][key])
-        //     };
-        //     return testArray.every((element) => element === true);
-        // }
-
         if(inbox.length > 1){
             inbox.sort((a,b) => a[key] < b[key] ? 1 : -1);
-        }; 
-
-        // if(inbox.length > 1){
-        //     if(isSorted()){
-        //         inbox.sort((a,b) => a[key] > b[key] ? 1 : -1);
-        //     } else {
-        //         inbox.sort((a,b) => a[key] < b[key] ? 1 : -1);
-        //     };
-        // };   
+        };   
 
         console.log(inbox);
     }
-
-    // sortByDeadline(){
-    //     let inbox = this.getInbox();
-    //     if(inbox.length > 1){
-    //         inbox.sort((a,b) => a["deadline"] < b["deadline"] ? 1 : -1);
-    //     };
-    // }
-
-    // sortByPriority(){
-    //     let inbox = this.getInbox();
-    //     if(inbox.length > 1){
-    //         inbox.sort((a,b) => {
-    //             a["deadline"] < b["deadline"] ? 1 : -1;
-    //         });
-    //     };
-    // }
 
     stampNote(stamp = "done"){
         if(this.getInbox().length > 0){

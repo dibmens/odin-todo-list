@@ -10,8 +10,8 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             hash: true,
-            title: 'Todossier',
-            header: 'TODOSSIER',
+            title: 'Indout',
+            header: 'INDOUT',
             metaDesc: 'Dynamic todo app exercise',
             template: './src/index.html',
             filename: 'index.html',
