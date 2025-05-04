@@ -41,7 +41,8 @@ export default function loadProjectPage(){
             <button class="tool inactive archive-project" data-tooltip = "Archive Project"></button>
             <button class="tool inactive ideas" data-tooltip = "Ideas"></button>
         </div>
-    </div>`;
+    </div>
+    `;
     
     content.innerHTML = ``;
     content.insertAdjacentHTML(`afterbegin`, projectPage);
@@ -62,12 +63,12 @@ function loadProjects(){
         let projectButton = document.createElement(`button`);
         projectButton.classList.add(`project-button`);
         projectButton.innerHTML = `
+            <div class="project-progress">
+                ${outboxCount} / ${inboxCount + outboxCount}
+            </div>
             <div class="project-button-icon"></div>
             <div class="project-button-title">
                 ${project.getProjectName()}
-            </div>
-            <div class="project-progress">
-                ${outboxCount} / ${inboxCount + outboxCount}
             </div>`;
         projectBar.append(projectButton);
     });
@@ -77,7 +78,7 @@ function loadProjects(){
     folders.forEach((folder,index) => {
         if(openProject){
             if(index == openIndex){
-                folder.firstElementChild.classList.add(`open`);
+                folder.childNodes[3].classList.add(`open`);
             }
         }
     })
@@ -85,11 +86,10 @@ function loadProjects(){
     let newProjectButton = document.createElement(`button`);
     newProjectButton.classList.add(`new-project-button`);
     newProjectButton.innerHTML = `
+        <div class="project-progress"> </div>
         <div class="project-button-icon add-new"></div>
-        <div class="project-button-title" style="color:green">NEW</div>
-        <div class="project-progress" >
-            PROJECT
-        </div>`;
+        <div class="project-button-title" style="color:green">NEW PROJECT</div>
+        `;
 
     projectBar.append(newProjectButton);
 
@@ -107,8 +107,8 @@ function projectButtonActions(){
             openProject = Project.getActiveProjects()[index];
             openIndex = index;
             loadTasks();
-            folders.forEach(folder => folder.firstElementChild.classList.remove(`open`));
-            button.firstElementChild.classList.add(`open`);
+            folders.forEach(folder => folder.childNodes[3].classList.remove(`open`));
+            button.childNodes[3].classList.add(`open`);
         })
     );
     newFolderButton.addEventListener(`click`, () => {
@@ -365,7 +365,7 @@ function projectActions(){
                     `;
                     projectTitle.innerHTML = ``;
                     projectTitle.append(renameWindow);
-                    renameWindow[0].value = `${openProject.getProjectName().toUpperCase()}`;
+                    renameWindow[0].value = `${openProject.getProjectName()}`;
                     renameWindow[0].focus();
                     
                     renameWindow[0].addEventListener(`focusout`, (event)=>{
@@ -407,7 +407,7 @@ function projectActions(){
 
                     confirm.addEventListener(`click`, ()=> {
                         document.querySelectorAll(`.project-button`).forEach((project, index) => {
-                            if(project.firstElementChild.classList.contains(`open`)){
+                            if(project.childNodes[3].classList.contains(`open`)){
                                 confirmationWindow.close();
                                 Project.archiveProject(index);
                                 Project.saveUserProjects();

@@ -208,16 +208,17 @@ button {
 
 .content {
     
-    display: grid;
+    display: flex;
     flex-grow: 1;
+    justify-content: center;
 }
 
 .project-wrapper {
     /* padding: 1em; */
     justify-self: center;
-    max-width: 1000px;
+    max-width: 950px;
     flex-grow: 1;
-    width: 95%;
+    /* width: 90%; */
     /* align-self: center; */
     display: grid;
     grid-template-columns: 1fr 8fr 1fr;
@@ -341,8 +342,14 @@ button {
     align-self: center;
     text-align: center;
     font-weight:700;
-    font-size: 2.5em;
+    /* font-size: 2vw; */
     grid-column: 2;
+    font-size: 2.6em;
+    text-overflow: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 1em;
     /* order: -1; */
 }
 
@@ -555,23 +562,25 @@ dialog,
     grid-auto-flow: row;
     justify-content: center;
     align-content: stretch;
+    /* overflow-y: auto; */
 }
 
-.project-button {
+.project-button,
+.new-project-button {
     border:none;
     background-color: rgba(0,0,0,0);
+    display: grid;
+    grid-template-rows: 0.1fr 3fr 2fr;
+    /* gap: 3px; */
+    align-content: start;
 
-    &:hover {
-        .project-button-icon{
-            transform: translate(3px, -1px);
-        }
-    }
 
     &:active {
         background-color: rgb(197, 196, 196);
     }
 }
 
+.project-button,
 .new-project-button {
     &:hover {
         transform: translate(3px, -1px);
@@ -579,7 +588,7 @@ dialog,
 }
 
 .project-button-icon{
-    height: 65%;
+    /* height: 65%; */
     min-height: 2.9em;
     background-image: url(./assets/icons/folder.svg);
     background-repeat: no-repeat;
@@ -588,14 +597,17 @@ dialog,
 }
 .project-button-title {
     text-align: center;
-    font-weight: 600;
-    font-size: 1em;
+    font-weight: 500;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
 }
 
 .project-progress {
     text-align: center;
     font-weight: 500;
-    color: green;
+    color: brown;
 }
 
 .project-button-icon.open {
@@ -614,7 +626,7 @@ dialog,
     grid-template-rows: repeat(6,1fr);
     /* padding: 1rem; */
     min-width: 1rem;
-    gap: 1.5rem;
+    gap: 1.7rem;
 }
 
 .tool-bar:last-of-type {
@@ -631,6 +643,10 @@ dialog,
         background-size: contain;
     }
 
+}
+
+.ideas {
+    grid-row: 5;
 }
 
 /* .inactive {
@@ -678,119 +694,8 @@ dialog,
 
 
 
-@media screen and ( max-width: 900px){
-    body {
-        /* background-color: rgba(225, 0, 0,.7); */
-        /* transition: 1s; */
-    }
-    .project-wrapper {
-        width: 100%;
-        grid-template-columns:  2fr 9fr 2fr;
-        grid-template-rows: 0.7fr 9fr 3fr;
-    }
-    .project-bar {
-        font-size: 0.8rem;
-        grid-row: 1/4;
-        grid-column: 1;
-        align-content: start;
-        background-color: rgba(0,0,0,.2);
-        gap: .5em;
-        padding-top: .5em;
-    }
-
-    .project-button
-    .new-project-button {
-        padding: .5em .5em .8em .5em;
-    }
-    .project-button-icon {
-        height: 50%;
-    }
-
-    .project-button-title {
-        font-size: 1em;
-    }
-
-    .tool-bar {
-        grid-row: 2/3;
-        grid-column: 3;
-        grid-template-rows: repeat(8,1fr);
-        gap:1em;
-        align-content: start;
-        padding: 1em .5em 1em 0;
-    }
-
-    .tool-bar:last-of-type {
-        grid-template-rows: repeat(3,1fr);
-        grid-row: 3/4;
-    }
 
 
-    .tool {
-        background-size: contain;
-        /* justify-self: left; */
-        /* max-width: 2em; */
-
-        &:hover {
-            background-size: contain;
-        }
-    }
-
-    .ideas {
-        grid-row:2;
-    }
-    .archive-project {
-        grid-row: 3;
-    }
-    .open-project {
-        grid-column: 2/3;
-        grid-row: 2/4;
-        padding: 0 1em 0 0.5em;
-        /* padding: 1em; */
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
-    }
-
-    .open-project-title {
-        grid-row: 1;
-        grid-column: 2/4;
-        font-size: 2em;
-        align-self: start;
-        padding-top: .2em;
-        /* order: 0; */
-    }
-
-    .inbox-status,
-    .outbox-status {
-        font-size: 1.4em;
-    }
-
-    .task {
-        padding: 0.3rem;
-        font-size: 1.5rem;
-    }
-
-    .note-form {
-        padding: 0 !important;
-        font-size: 1rem !important;
-        input {
-            position: ;
-            
-        }
-    }
-
-    .list-view {
-        font-size: 1em;
-    }
-
-    .form-title {
-        margin-bottom: 0;
-    }
-
-    /* .tool:hover::before {
-        left: 5em;
-    } */
-
-}
 
 .tool:hover::after {
     font-size: 0.8rem;
@@ -800,10 +705,10 @@ dialog,
     color: aliceblue;
     content: attr(data-tooltip);
     position: absolute;
-    display: inline-block;
+    /* display: inline-block; */
     bottom: -1.5rem;
-    right: 1rem;
-    max-width: 10rem;
+    right: 1.5rem;
+    /* max-width: 10rem; */
 }
 
 .confirmation-window{
@@ -896,5 +801,137 @@ dialog,
         border: none;
     }
 
+
+}
+
+@media screen and ( max-width: 900px){
+    body {
+        /* background-color: rgba(225, 0, 0,.7); */
+        /* transition: 1s; */
+    }
+    .project-wrapper {
+        width: 100%;
+        grid-template-columns:  2.5fr 9fr 2fr;
+        grid-template-rows: 0.7fr 6fr 6fr;
+    }
+
+
+
+    .project-bar {
+        font-size: 0.8rem;
+        grid-row: 1/4;
+        grid-column: 1;
+        align-content: start;
+        background-color: rgba(0,0,0,.2);
+        gap: 1em;
+        padding-top: .5em;
+    }
+
+    .project-button
+    .new-project-button {
+        /* grid-template-rows: 0.1fr 2fr 1fr; */
+        gap: 0;
+        /* padding: .5em .5em .8em .5em; */
+    }
+    .project-button-icon {
+        /* height: 50%; */
+    }
+
+    .project-button-title {
+        /* font-size: 1em; */
+    }
+
+    .tool-bar {
+        grid-row: 2/3;
+        grid-column: 3;
+        grid-template-rows: repeat(5,1fr);
+        /* gap:2em; */
+        align-content: start;
+        padding: 1em .5em 1em 0;
+        margin-bottom: 2em;
+    }
+
+    .tool-bar:last-of-type {
+        /* grid-template-rows: repeat(3,1fr); */
+        grid-row: 3/4;
+    }
+
+
+    .tool {
+        background-size: contain;
+        /* justify-self: left; */
+        /* max-width: 2em; */
+
+        &:hover {
+            background-size: contain;
+        }
+    }
+
+    .rename-project {
+        /* grid-row: 0; */
+    }
+
+    .ideas {
+        grid-row:5;
+    }
+    .archive-project {
+        /* grid-row: 2; */
+    }
+    .open-project {
+        grid-column: 2/3;
+        grid-row: 2/4;
+        padding: 0 1em 0 0.5em;
+        /* padding: 1em; */
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .open-project-title {
+        grid-row: 1;
+        grid-column: 2;
+        font-size: 1.5em;
+        /* align-self: start; */
+        padding-top: .2em;
+        /* order: 0; */
+    }
+
+    /* .title-input {
+        max-width: 50px;
+    } */
+
+    #title-input {
+        background-color: aliceblue;
+    }
+
+    .inbox-status,
+    .outbox-status {
+        font-size: 1.4em;
+    }
+
+    .task {
+        padding: 0.3rem;
+        font-size: 1.5rem;
+    }
+
+    .note-form {
+        padding: 0 !important;
+        font-size: 1rem !important;
+        input {
+            position: ;
+            
+        }
+    }
+
+    .list-view {
+        font-size: 1em;
+    }
+
+    .form-title {
+        margin-bottom: 0;
+    }
+
+    /* .tool:hover::before {
+        left: 5em;
+    } */
 
 }
