@@ -411,7 +411,12 @@ function projectActions(){
                                 confirmationWindow.close();
                                 Project.archiveProject(index);
                                 Project.saveUserProjects();
-                                location.reload();
+                                openProject = Project.getActiveProjects()[index-1]
+                                if(openProject){
+                                    document.querySelectorAll(`.project-button`)[index-1].click();
+                                }
+                                loadProjectPage();
+                                
                             }
                         })
                     })

@@ -1,5 +1,6 @@
 import Data from './data/taglines.json';
 import loadProjectPage from './projectPage';
+import Project from './userProjects';
 
 export default function loadLandingPage(){
     let header = document.querySelector(`.header`);

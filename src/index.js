@@ -1,12 +1,11 @@
 import _ from 'lodash';
 import './style.css';
 import loadLandingPage from './landingPage';
-import Project, { activeProjects, fetchProjects, getActiveProjects, storeProjects } from './userProjects';
+import Project from './userProjects';
 import loadProjectPage from './projectPage';
 
 
-menuActions();
-loadLandingPage();
+
 
 function menuActions(){
     let menuButton = document.querySelector(".settings");
@@ -57,6 +56,10 @@ function menuActions(){
 
     });
 
+    document.querySelector(`.content`).addEventListener(`mouseover`, ()=> {
+        menuWindow.classList.add(`hidden`);
+    })
+
 }
 
 
@@ -99,3 +102,7 @@ function loadArchive(){
     })
 
 }
+
+menuActions();
+loadProjectPage();
+loadLandingPage();
