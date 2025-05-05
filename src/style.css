@@ -692,9 +692,6 @@ dialog,
     padding-bottom: 1.5em;
     margin: 0 1em;
 }
-.idea-button {
-    margin-top: -1em;
-}
 
 .archive-window {
 
@@ -860,4 +857,13 @@ dialog,
     }
 
 
+}
+
+
+.note-view:last-of-type:hover {
+    transform: rotate(-2deg);
+}
+
+.inactive {
+    opacity: 0.3;
 }

@@ -30,16 +30,16 @@ export default function loadProjectPage(){
 
         </div>
         <div class="tool-bar">
-            <button class="tool inactive new-note" data-tooltip = "New Task"></button>
-            <button class="tool inactive edit-note" data-tooltip = "Edit Task"></button>
-            <button class="tool inactive delete-task" data-tooltip = "Delete Task"></button>
-            <button class="tool inactive sort sort-time" data-tooltip = "Sort Inbox"></button>
-            <button class="tool inactive stamp-done" data-tooltip = "Complete Task"></button>  
+            <button class="tool new-note" data-tooltip = "New Task"></button>
+            <button class="tool edit-note" data-tooltip = "Edit Task"></button>
+            <button class="tool delete-task" data-tooltip = "Delete Task"></button>
+            <button class="tool sort sort-time" data-tooltip = "Sort Inbox"></button>
+            <button class="tool stamp-done" data-tooltip = "Complete Task"></button>  
         </div>
         <div class="tool-bar">
-            <button class="tool inactive rename-project" data-tooltip="Rename Project"></button>
-            <button class="tool inactive archive-project" data-tooltip = "Archive Project"></button>
-            <button class="tool inactive ideas" data-tooltip = "Ideas"></button>
+            <button class="tool rename-project" data-tooltip="Rename Project"></button>
+            <button class="tool archive-project" data-tooltip = "Archive Project"></button>
+            <button class="tool ideas" data-tooltip = "Ideas"></button>
         </div>
     </div>
     `;
@@ -51,6 +51,7 @@ export default function loadProjectPage(){
     loadTasks();
     loadProjects();
     projectActions();
+    displayActiveTools();
 };
 
 function loadProjects(){
@@ -94,6 +95,7 @@ function loadProjects(){
     projectBar.append(newProjectButton);
 
     projectButtonActions();
+    displayActiveTools();
 
     
     
@@ -197,6 +199,7 @@ function loadTasks(){
         displayProjectTitle();
         displayInboxTaskCount();
         toggleList();
+        displayActiveTools();
     }
 
 }
@@ -266,13 +269,71 @@ function projectActions(){
     document.querySelectorAll(`.tool`).forEach(button => 
         button.addEventListener(`click`, () => {
 
-            if(openProject){
+            if(button.classList.contains(`ideas`)){
+                if(document.querySelector(`.idea-window`)){
+                    document.querySelector(`.idea-window`).remove();
+                }
                 
+                function numGen(){
+                    return Math.trunc(Math.random()*Ideas.length);
+                }
+
+                let ideaWindow = document.createElement(`dialog`);
+                let index = numGen();
+                ideaWindow.classList.add(`idea-window`)
+                ideaWindow.innerHTML = `
+                <h4>${Ideas[index].title}</h4>
+                <p>${Ideas[index].idea}</p>
+                <button class="idea-button">CLOSE</button>
+                `;
+                document.querySelector(`.footer`).prepend(ideaWindow);
+                ideaWindow.show();
+
+                let button = document.querySelector(`.idea-button`);
+                button.addEventListener(`click`, ()=> {
+                    ideaWindow.close();
+                })
+            }
+
+            if(openProject){
                 if(button.classList.contains(`new-note`)){
                     if(!document.querySelector(`.note-form`))
+                    loadTasks();    
                     openNoteForm();
                 }
-    
+            
+                if(button.classList.contains(`rename-project`)){
+                    let projectTitle = document.querySelector(`.open-project-title`)
+                    let renameWindow = document.createElement(`form`);
+                    renameWindow.classList.add(`.rename-form`);
+                    renameWindow.innerHTML = `
+                        <input id="title-input" required></input>
+                    `;
+                    projectTitle.innerHTML = ``;
+                    projectTitle.append(renameWindow);
+                    renameWindow[0].value = `${openProject.getProjectName()}`;
+                    renameWindow[0].focus();
+                    
+                    renameWindow[0].addEventListener(`focusout`, (event)=>{
+                        event.preventDefault;
+                        if(renameWindow.reportValidity()){
+                            projectTitle.innerHTML = `${renameWindow[0].value.toUpperCase()}`;
+                            document.querySelectorAll(`.project-button-icon`).forEach((folder,index)=> {
+                                if(folder.classList.contains(`open`)){
+                                    Project.getActiveProjects()[index].setProjectName(renameWindow[0].value);
+                                    Project.saveUserProjects();
+                                    loadProjectPage();
+                                }
+                            })
+                        }
+                    })
+                }
+
+            }
+
+
+            if(openProject && openProject.getInbox().length > 0){
+                
                 if(button.classList.contains(`edit-note`)){
                     if(openProject.getInbox().length > 0){
                         
@@ -355,35 +416,10 @@ function projectActions(){
                         loadProjects();
                     }
                 }
+            }
+                
+            if(openProject && openProject.getOutbox().length > 0){
 
-                if(button.classList.contains(`rename-project`)){
-                    let projectTitle = document.querySelector(`.open-project-title`)
-                    let renameWindow = document.createElement(`form`);
-                    renameWindow.classList.add(`.rename-form`);
-                    renameWindow.innerHTML = `
-                        <input id="title-input" required></input>
-                    `;
-                    projectTitle.innerHTML = ``;
-                    projectTitle.append(renameWindow);
-                    renameWindow[0].value = `${openProject.getProjectName()}`;
-                    renameWindow[0].focus();
-                    
-                    renameWindow[0].addEventListener(`focusout`, (event)=>{
-                        event.preventDefault;
-                        if(renameWindow.reportValidity()){
-                            projectTitle.innerHTML = `${renameWindow[0].value.toUpperCase()}`;
-                            document.querySelectorAll(`.project-button-icon`).forEach((folder,index)=> {
-                                if(folder.classList.contains(`open`)){
-                                    Project.getActiveProjects()[index].setProjectName(renameWindow[0].value);
-                                    Project.saveUserProjects();
-                                    loadProjectPage();
-                                }
-                            })
-                        }
-                    })
-                }
-
-    
                 if(button.classList.contains(`archive-project`)){
 
                     if(document.querySelector(`.confirmation-window`)){
@@ -416,45 +452,16 @@ function projectActions(){
                                     document.querySelectorAll(`.project-button`)[index-1].click();
                                 }
                                 loadProjectPage();
-                                
                             }
                         })
                     })
 
                     cancel.addEventListener(`click`, ()=> {
                         confirmationWindow.remove();
-                        // alert(`not this shit again`);
                     })
                 }
-    
-                if(button.classList.contains(`ideas`)){
-                    if(document.querySelector(`.idea-window`)){
-                        document.querySelector(`.idea-window`).remove();
-                    }
-                    
-                    function numGen(){
-                        return Math.trunc(Math.random()*Ideas.length);
-                    }
-
-                    let ideaWindow = document.createElement(`dialog`);
-                    let index = numGen();
-                    ideaWindow.classList.add(`idea-window`)
-                    ideaWindow.innerHTML = `
-                    <h4>${Ideas[index].title}</h4>
-                    <p>${Ideas[index].idea}</p>
-                    <button class="idea-button">CLOSE</button>
-                    `;
-                    document.querySelector(`.footer`).prepend(ideaWindow);
-                    ideaWindow.show();
-
-                    let button = document.querySelector(`.idea-button`);
-                    button.addEventListener(`click`, ()=> {
-                        ideaWindow.close();
-                    })
-
-
-                }
-            }
+            }    
+        
         }) 
     );
 }
@@ -495,4 +502,29 @@ function openProjectForm(){
         event.preventDefault();
         dialogWindow.close();
     });
+}
+
+function displayActiveTools(){
+
+    document.querySelectorAll(`.tool`).forEach((tool) => {
+       if(!tool.classList.contains(`ideas`)){
+        tool.classList.add(`inactive`);
+       } 
+    });
+
+    if(openProject){
+        document.querySelector(`.new-note`).classList.remove(`inactive`);
+        document.querySelector(`.rename-project`).classList.remove(`inactive`);
+    }
+
+    if(openProject && openProject.getInbox().length > 0){
+        document.querySelector(`.edit-note`).classList.remove(`inactive`);
+        document.querySelector(`.delete-task`).classList.remove(`inactive`);
+        document.querySelector(`.sort`).classList.remove(`inactive`);
+        document.querySelector(`.stamp-done`).classList.remove(`inactive`);
+    }
+
+    if(openProject && openProject.getOutbox().length > 0){
+        document.querySelector(`.archive-project`).classList.remove(`inactive`);
+    }
 }
