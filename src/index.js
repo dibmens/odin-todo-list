@@ -64,14 +64,18 @@ function menuActions(){
 
 
 function loadArchive(){
-    let archiveWindow = document.createElement(`dialog`)
+    let archiveWindow = document.createElement(`dialog`);
     let confirmButton = document.createElement(`button`);
+    let emptyPrompt = document.createElement(`div`);
     archiveWindow.classList.add(`archive-window`);
     confirmButton.classList.add(`confirm-button`);
     confirmButton.innerText = `CLOSE`;
-    archiveWindow.innerHTML = `
-        <h2>Project Archive</h2>
-    `
+    archiveWindow.innerHTML = `<h2>PROJECT ARCHIVE</h2>`;
+    emptyPrompt.innerHTML = `You haven't completed any projects yet`
+
+    if(Project.getArchivedProjects().length < 1){
+        archiveWindow.append(emptyPrompt);
+    }
 
     Project.getArchivedProjects().forEach((project) => {
         let projectTitle = document.createElement(`div`);
@@ -91,8 +95,10 @@ function loadArchive(){
         });
 
         archiveWindow.append(projectTitle);
-        archiveWindow.append(confirmButton);
+        
     });
+
+    archiveWindow.append(confirmButton);
 
     document.querySelector(`.header`).append(archiveWindow);
     archiveWindow.showModal();

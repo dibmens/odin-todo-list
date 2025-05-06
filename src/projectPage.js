@@ -383,12 +383,12 @@ function projectActions(){
                             Project.saveUserProjects();
                             loadTasks();
                             loadProjects();
-                            confirmationWindow.close();
+                            confirmationWindow.remove();
                             
                         })
 
                         cancel.addEventListener(`click`, ()=> {
-                            confirmationWindow.close();
+                            confirmationWindow.remove();
                         })
                     }
                 }
@@ -444,7 +444,7 @@ function projectActions(){
                     confirm.addEventListener(`click`, ()=> {
                         document.querySelectorAll(`.project-button`).forEach((project, index) => {
                             if(project.childNodes[3].classList.contains(`open`)){
-                                confirmationWindow.close();
+                                confirmationWindow.remove();
                                 Project.archiveProject(index);
                                 Project.saveUserProjects();
                                 openProject = Project.getActiveProjects()[index-1]
